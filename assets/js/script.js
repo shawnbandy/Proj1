@@ -35,6 +35,7 @@ var mainArticleDescription = document.getElementById("mainArticleDescription");
 var mainArticleLink = document.getElementById("mainArticleLink");
 var currentCategory = document.getElementById("currentCategory");
 var testButton = document.getElementById("testButton");
+var mainArticleToolTipText = document.getElementById("tooltiptext")
 
 testButton.addEventListener("click", function(){
     var category = "Arts";
@@ -64,6 +65,7 @@ function GetMainArticleTopStory(categoryOfNews){
             var articleHover = data.results[0].multimedia[0].caption;
             var articleLink = data.results[0].url
 
+            mainArticleToolTipText.textContent = articleHover;
             mainArticleTitle.textContent = articleTitle;
             mainArticleDescription.textContent = articleDescription;
             mainArticleImage.src = articleImage;
