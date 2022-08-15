@@ -1,45 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <!--*Tailwind linking--> 
-        <script 
-        rel="stylesheet"
-        src="https://cdn.tailwindcss.com">
-        </script>
-        <!--*other fonts-->
-        <link
-          rel="stylesheet"
-          href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-          crossorigin="anonymous"
-        />
-        <!--*google fonts-->
-        <link
-          href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" 
-          rel="stylesheet"
-        />
-        <script
-          type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
-        ></script>
-        <link rel="stylesheet" href="assets/css/style.css" />
-        <title>Work Day Scheduler</title>
-      </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!--*Tailwind linking-->
+    <script rel="stylesheet" src="https://cdn.tailwindcss.com"></script>
+    <!--*other fonts-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <!--*google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700;1,200&display=swap"
+      rel="stylesheet"
+    />
 
-      <body class="container">
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Work Day Scheduler</title>
+  </head>
 
-        <header class="text-center h-16 border border-black w-screen bg-emerald-600">
-          <h1 class="pb-3">this will be the header</h1>
-          <div class="flex justify-evenly">
-            <p>category 1</p>
-            <p>category 2</p>
-            <p>category 3</p>
-            <p>category 4</p>
-            <p>category 5</p>
-            <p>category etc</p>
+  <body class="container">
+    <header class="text-center h-16 border border-black w-screen">
+      <h1 class="pb-3"></h1>
+      <div class="navbar">
+        <div class="navigation">
+          <a href="#sports">Sports</a>
+          <a href="#science">Science</a>
+          <a href="#politics">Politics</a>
+          <a href="#economics">Economics</a>
+          <a href="#celebrity">Celebrity</a>
+        </div>
+        <div class="find">
+          <div class="search-bar"></div>
+          <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search" />
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-6 w-screen flex h-auto">
+      <!--*Sidebar-->
+      <aside class="border-solid border border-black h-auto w-1/6">
+        <div class="border">
+          <p>this will be the sidebar</p>
+        </div>
+      </aside>
+
+      <!--*Main body-->
+      <section class="text-center border border-black h-screen w-5/6">
+        <div
+          class="border border-green-500 h-16 m-1 flex items-center justify-center"
+        >
+          <p>this will be the main body header. CATEGORY: TYPE</p>
+        </div>
+
+        <div class="flex flex-col h-2/4 border border-red-500 m-1">
+          <div class="m-1 border border-orange-500 h-full">
+            <div>
+              <p>Main article title</p>
+            </div>
+            <div
+              class="grid justify-items-center border border-green-600 h-5/6 m-1"
+            >
+              <img
+                src=""
+                alt="placeholder"
+                class="w-3/4 h-auto border object-contain"
+              />
+            </div>
           </div>
         </header>
 
@@ -90,74 +132,45 @@
               </div>
               <p>this will be the sidebar</p>
             </div>
-          </aside>
+          </div>
 
-          <!--*Main body-->
-          <section class="text-center border border-black h-screen w-5/6">
-
-            <div class="border border-green-500 h-16 m-1 flex items-center justify-center">
-              <p>this will be the main body header. CATEGORY: TYPE</p>
+          <div class="column m-1">
+            <p>article 2</p>
+            <div>
+              <img
+                src="https://designshack.net/wp-content/uploads/placehold.jpg"
+                alt="placeholder"
+              />
             </div>
+          </div>
 
-            <div class="flex flex-col h-2/4 border border-red-500 m-1">
-              <div class="m-1 border border-orange-500 h-full">
-                <div>
-                  <p>Main article title</p>
-                </div>
-                <div class="grid justify-items-center border border-green-600 h-5/6 m-1">
-                  <img 
-                  src="" 
-                  alt="placeholder"
-                  class="w-3/4 h-auto border object-contain"/>
-                </div>
-              </div>
+          <div class="column m-1">
+            <p>article 3</p>
+            <div>
+              <img
+                src="https://designshack.net/wp-content/uploads/placehold.jpg"
+                alt="placeholder"
+              />
             </div>
+          </div>
 
-            <div class="flex justify-evenly border border-blue-500 h-2/6 m-1">
-              <div class="column m-1">
-                <p>article 1</p>
-                <div>
-                  <img 
-                  src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                  alt="placeholder"
-                  />
-                </div>
-              </div>
-
-              <div class="column m-1">
-                <p>article 2</p>
-                <div>
-                  <img 
-                  src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                  alt="placeholder"
-                  />
-                </div>
-              </div>
-
-              <div class="column m-1">
-                <p>article 3</p>
-                <div>
-                  <img 
-                  src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                  alt="placeholder"
-                  />
-                </div>
-              </div>
-
-              <div class="column m-1">
-                <p>article 4</p>
-                <div>
-                  <img 
-                  src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                  alt="placeholder"
-                  />
-                </div>
-              </div>
-
+          <div class="column m-1">
+            <p>article 4</p>
+            <div>
+              <img
+                src="https://designshack.net/wp-content/uploads/placehold.jpg"
+                alt="placeholder"
+              />
             </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
+    <footer class="text-center h-auto border border-black w-screen bg-sky-400">
+      <p>this will be the footer</p>
 
-
+      <button>Subscribe</button>
           </section>
           <div id="myModal" style="display: none; top: 50%; left: 50%; transform: translateX(-50%); transform: rotateY(-50%);" class="float-left justify-center modal m-auto pt-14 pb-14 border-2 w-4/5 fixed z-50 top-0 left-0 bg-white ">
 
@@ -181,10 +194,6 @@
           
           </div>
 
-
-
-
-
         </main>
 
         <footer class="text-center h-auto border border-black w-screen bg-sky-400">
@@ -202,9 +211,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
       </body>
-
-
-
-
 
 </html>
