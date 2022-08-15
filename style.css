@@ -41,4 +41,5 @@ input[type="text"] {
   font-size: 17px;
   border: none;
   cursor: pointer;
+  border: 0em;
 }
