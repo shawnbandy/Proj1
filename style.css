@@ -8,6 +8,9 @@ header {
 }
 .navbar {
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .navbar a {
   float: left;
@@ -27,19 +30,10 @@ input[type="text"] {
   margin-top: 8px;
   font-size: 17px;
   border: none;
-  float: right;
   border-radius: 4px;
   border-right: 5px;
 }
 
-.search-bar button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-  border: 0em;
+.find {
+  margin-right: 1em;
 }
