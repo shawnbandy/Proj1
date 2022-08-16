@@ -32,7 +32,7 @@ document.getElementById("Sports").addEventListener("click", searchSports);
 //for loop to be added to have a different sports article in each section
 
 function searchScience() {
-  console.log("hello");
+  console.log("hello love");
   var requestUrl =
     "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=science&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
