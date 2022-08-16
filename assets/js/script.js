@@ -3,7 +3,7 @@ var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 var sidebarEL =document.querySelector(".newssidebar");
 const APIkey = "L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
-var topstoryone = document.q
+
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
