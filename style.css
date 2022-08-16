@@ -1,0 +1,39 @@
+body {
+  font-family: "Titillium Web", sans-serif;
+}
+
+header {
+  background-color: rgba(98, 162, 98, 0.565);
+  height: 100px;
+}
+.navbar {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.navbar a {
+  float: left;
+  font-size: 20px;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: white;
+}
+
+input[type="text"] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  border-radius: 4px;
+  border-right: 5px;
+}
+
+.find {
+  margin-right: 1em;
+}
