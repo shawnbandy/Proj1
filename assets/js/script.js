@@ -9,11 +9,6 @@ TODO: Populate/Fetch the main article
     *Change the body header to the category type
 TODO: Add hover effects to articles to show the abstract/summary
 TODO: Change 
-
-
-
-
-
 */
 
 //!API KEYS:
@@ -35,7 +30,20 @@ var mainArticleDescription = document.getElementById("mainArticleDescription");
 var mainArticleLink = document.getElementById("mainArticleLink");
 var currentCategory = document.getElementById("currentCategory");
 var testButton = document.getElementById("testButton");
-var mainArticleToolTipText = document.getElementById("tooltiptext")
+var mainArticleToolTipText = document.getElementById("tooltiptext");
+var navigationBar = document.getElementById("navigationBar");
+
+if (localStorage.getItem("lastCategory")){
+    GetMainArticleTopStory(localStorage.getItem("lastCategory"));
+} else {
+    GetMainArticleTopStory(home)
+}
+
+navigationBar.addEventListener("click", function(event){
+    event.preventDefault;
+    localStorage.setItem("lastCategory", event.target.textContent);
+    GetMainArticleTopStory(event.target.textContent);
+})
 
 testButton.addEventListener("click", function(){
     var category = "Arts";
@@ -47,7 +55,7 @@ testButton.addEventListener("click", function(){
 
 function GetMainArticleTopStory(categoryOfNews){
 
-    // currentCategory.textContent = categoryOfNews;
+    currentCategory.textContent = categoryOfNews;
     
     var requestURL = "https://api.nytimes.com/svc/topstories/v2/" + categoryOfNews + ".json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
@@ -56,7 +64,6 @@ function GetMainArticleTopStory(categoryOfNews){
             return response.json();
         })
         .then(function(data){
-            console.log(data);
             var articleImage = data.results[0].multimedia[0].url;
             var articleTitle = data.results[0].title;
             var articleDescription = data.results[0].abstract;
@@ -72,6 +79,34 @@ function GetMainArticleTopStory(categoryOfNews){
         })
 
 
+}
+
+function GetOtherNewsStory(categoryOfNews){
+
+    currentCategory.textContent = categoryOfNews;
+
+    var requestURL = "https://api.nytimes.com/svc/semantic/v2/concept/name/nytd_des/" + categoryOfNews + ".json?fields=all&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
+
+    fetch(requestURL)
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(data){
+            console.log(data)
+            var articleImage = data.results[0].multimedia[0].url;
+            var articleTitle = data.results[0].title;
+            var articleDescription = data.results[0].abstract;
+            var articleHover = data.results[0].multimedia[0].caption;
+            var articleLink = data.results[0].url
+
+            mainArticleToolTipText.textContent = articleHover;
+            mainArticleTitle.textContent = articleTitle;
+            mainArticleDescription.textContent = articleDescription;
+            mainArticleImage.src = articleImage;
+            mainArticleLink.href = articleLink;
+        })
+
+    
 }
 
 
