@@ -26,207 +26,181 @@
           src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
         ></script>
         <link rel="stylesheet" href="assets/css/style.css" />
-        <title>Fast News</title>
+        <title>Work Day Scheduler</title>
       </head>
 
-      <body class="container">
+  <body class="container">
+    <header class="text-center h-16 border border-black w-screen">
+      <h1 class="pb-3"></h1>
+      <div class="navbar">
+        <div class="navigation">
+          <a href="#sports">Sports</a>
+          <a href="#science">Science</a>
+          <a href="#politics">Politics</a>
+          <a href="#economics">Economics</a>
+          <a href="#celebrity">Celebrity</a>
+        </div>
+        <div class="find">
+          <div class="search-bar"></div>
+          <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search" />
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </header>
 
-        <header class="text-center h-16 border border-black w-screen bg-emerald-600">
-          <h1 class="pb-3">this will be the header</h1>
-          <div class="flex justify-evenly">
-            <p>category 1</p>
-            <p>category 2</p>
-            <p>category 3</p>
-            <p>category 4</p>
-            <p>category 5</p>
-            <p>category etc</p>
-          </div>
-        </header>
-
-        <main class="p-6 w-screen flex h-auto">
+    <main class="p-6 w-screen flex h-auto">
 
           <!--*Sidebar-->
-          <aside class="border-solid border border-black h-auto w-1/6">
-            <div class="border">
-              <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <img class="w-full" src="/card-top.jpeg" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                  <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                  <p class="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                </div>
-                div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <img class="w-full" src="/card-top.jpeg" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                  <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                  <p class="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                </div>
-                
-                <img class="w-full" src="/card-top.jpeg" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                  <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                  <p class="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                  </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
-                </div>
-              </div>
-              <p>this will be the sidebar</p>
+      <aside class="border-solid border border-black h-auto w-1/6">
+        <div class="border">
+          <div class="max-w-sm rounded overflow-hidden shadow-lg">
+            <img class="w-full" src="/card-top.jpeg" alt="Sunset in the mountains">
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+              <p class="text-gray-700 text-base">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              </p>
             </div>
-          </aside>
+            <div class="px-6 pt-4 pb-2">
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+            </div>
+            div class="max-w-sm rounded overflow-hidden shadow-lg">
+            <img class="w-full" src="/card-top.jpeg" alt="Sunset in the mountains">
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+              <p class="text-gray-700 text-base">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              </p>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+            </div>
+            
+            <img class="w-full" src="/card-top.jpeg" alt="Sunset in the mountains">
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
+              <p class="text-gray-700 text-base">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              </p>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+              <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+            </div>
+          </div>
+          <p>this will be the sidebar</p>
+        </div>
+      </aside>
 
           <!--*Main body-->
-          <section class="text-center border border-black h-screen w-5/6">
+      <section class="text-center border border-black h-screen w-5/6">
 
             <div class="border border-green-500 h-16 m-1 flex items-center justify-center">
-              <p id="currentCategory">this will be the main body header. CATEGORY: TYPE</p>
+              <p>this will be the main body header. CATEGORY: TYPE</p>
+            </div>
+            <!--*This is the section for the main article-->
+            <div class="flex flex-col h-2/4 border border-red-500 m-1">
+              <div class="m-1 border border-orange-500 h-full">
+                <div id="mainArticleTitle">
+                  <p>Main article title</p>
+                  <button id="testButton">testbutton</button>
+                </div>
+                <figure class="border border-green-600 h-5/6 m-1 tooltip w-1/2">
+                  <a id="mainArticleLink" href="#" target="_blank">
+                    <img 
+                    class="object-fit w-full h-full"
+                    id="mainArticleImage"
+                    src="https://designshack.net/wp-content/uploads/placehold.jpg" 
+                    alt="placeholder"
+                    text="test"
+                    />
+                    <figcaption id="tooltiptext">test</figcaption>
+                  </a>
+                  <p id="mainArticleDescription">Main Article Description</p>
+                </figure>
+              </div>
             </div>
 
-            <!--*This is the section for the main article-->
-              <div class="flex flex-col h-2/4 border border-red-500 m-1">
-                <div class="m-1 border border-orange-500 h-full">
-                  <div id="mainArticleTitle">
-                    <p>Main article title</p>
-                    <button id="testButton">testbutton</button>
-                  </div>
-                  <figure class="border border-green-600 h-5/6 m-1 tooltip w-1/2">
-                    <a id="mainArticleLink" href="#" target="_blank">
-                      <img 
-                      class="object-fit w-full h-full"
-                      id="mainArticleImage"
-                      src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                      alt="placeholder"
-                      text="test"
-                      />
-                      <figcaption id="tooltiptext">test</figcaption>
-                    </a>
-                    <p id="mainArticleDescription">Main Article Description</p>
-                  </figure>
+            <div class="flex justify-evenly border border-blue-500 h-2/6 m-1">
+              <div class="column m-1">
+                <p>article 1</p>
+                <div>
+                  <img 
+                  src="https://designshack.net/wp-content/uploads/placehold.jpg" 
+                  alt="placeholder"
+                  />
                 </div>
               </div>
 
-
-              <!--*This is the section for the 4 articles that are shown-->
-              <div class="flex justify-evenly border border-blue-500 h-2/6 m-1">
-                <div class="column m-1">
-                  <p>article 1</p>
-                  <div>
-                    <img 
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                    alt="placeholder"
-                    />
-                  </div>
-                </div>
-
-                <div class="column m-1">
-                  <p>article 2</p>
-                  <div>
-                    <img 
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                    alt="placeholder"
-                    />
-                  </div>
-                </div>
-
-                <div class="column m-1">
-                  <p>article 3</p>
-                  <div>
-                    <img 
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                    alt="placeholder"
-                    />
-                  </div>
-                </div>
-
-                <div class="column m-1">
-                  <p>article 4</p>
-                  <div>
-                    <img 
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                    alt="placeholder"
-                    />
-                  </div>
-                </div>
-
-                <div class="column m-1">
-                  <p>article 4</p>
-                  <div>
-                    <img 
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                    alt="placeholder"
-                    />
-                  </div>
-                </div>
-            
-
+          <div class="column m-1">
+            <p>article 2</p>
+            <div>
+              <img
+                src="https://designshack.net/wp-content/uploads/placehold.jpg"
+                alt="placeholder"
+              />
             </div>
-
-
-
-          </section>
-          <div id="myModal" style="display: none; top: 50%; left: 50%; transform: translateX(-50%); transform: rotateY(-50%);" class="float-left justify-center modal m-auto pt-14 pb-14 border-2 w-4/5 fixed z-50 top-0 left-0 bg-white ">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-              <span style="right: 0; top: 0; position: absolute;" class="close text-sm font-bold cursor-pointer">&times;</span>
-              <label style=" top: 50%; -ms-transform:translateY(-50%); transform: rotateY(-50%);">
-                <h3 class="text-center">Keep Up With The Latest News!</h3>
-                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                  Name
-                </span>
-                <input type="name" name="firstname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="First" />
-                <input type="name" name="lastname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Last" />
-              </label>
-                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                  Email
-                </span>
-                <input type="email" name="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
-              </label>
-            </div>
-          
           </div>
 
+          <div class="column m-1">
+            <p>article 3</p>
+            <div>
+              <img
+                src="https://designshack.net/wp-content/uploads/placehold.jpg"
+                alt="placeholder"
+              />
+            </div>
+          </div>
+
+          <div class="column m-1">
+            <p>article 4</p>
+            <div>
+              <img
+                src="https://designshack.net/wp-content/uploads/placehold.jpg"
+                alt="placeholder"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
 
+    <div id="myModal" style="display: none; top: 50%; left: 50%; transform: translateX(-50%); transform: rotateY(-50%);" class="float-left justify-center modal m-auto pt-14 pb-14 border-2 w-4/5 fixed z-50 top-0 left-0 bg-white ">
 
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span style="right: 0; top: 0; position: absolute;" class="close text-sm font-bold cursor-pointer">&times;</span>
+        <label style=" top: 50%; -ms-transform:translateY(-50%); transform: rotateY(-50%);">
+          <h3 class="text-center">Keep Up With The Latest News!</h3>
+          <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+            Name
+          </span>
+          <input type="name" name="firstname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="First" />
+          <input type="name" name="lastname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Last" />
+        </label>
+          <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+            Email
+          </span>
+          <input type="email" name="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+        </label>
+      </div>
+    
+    </div>
 
-        </main>
-
-        <footer class="text-center h-auto border border-black w-screen bg-sky-400">
-          <p>this will be the footer</p>
-
-          <button class="cursor-pointer" id="myBtn">Subscribe</button>
-
-          <p>testing height auto</p>
-
-        </footer>
+    </main>
 
 
         <script type= "text/javascript" src="assets/js/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-      </body>
-
-
-
-
+  </body>
 
 </html>

@@ -47,7 +47,7 @@ testButton.addEventListener("click", function(){
 
 function GetMainArticleTopStory(categoryOfNews){
 
-    currentCategory.textContent = categoryOfNews;
+    // currentCategory.textContent = categoryOfNews;
     
     var requestURL = "https://api.nytimes.com/svc/topstories/v2/" + categoryOfNews + ".json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
