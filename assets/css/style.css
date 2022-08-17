@@ -5,7 +5,7 @@
   }
   
   /* Tooltip text */
-  .tooltip #tooltiptext {
+.tooltip #tooltiptext {
     visibility: hidden;
     width: 100%;
     height: auto;
@@ -15,58 +15,58 @@
     border-radius: 6px;
    
     /* Position the tooltip text - see examples below! */
-  }
+}
   
   /* Show the tooltip text when you mouse over the tooltip container */
-  .tooltip:hover #tooltiptext {
+.tooltip:hover #tooltiptext {
     visibility: visible;
     align-content: center;
-  }
+}
 
 
-  figcaption {
+figcaption {
     position: absolute;
     left: 50%;
     -webkit-transform: translateX(-50%); /* Safari iOS */
     transform: translateX(-50%);
-  }
+}
 
-  body {
+body {
     font-family: "Titillium Web", sans-serif;
-  }
+}
   
-  header {
+header {
     background-color: rgba(98, 162, 98, 0.565);
     height: 100px;
-  }
-  .navbar {
+}
+.navbar {
     overflow: hidden;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
-  .navbar a {
+}
+.navbar a {
     float: left;
     font-size: 20px;
     color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-  }
+}
   
-  .navbar a:hover {
+.navbar a:hover {
     background-color: white;
-  }
+}
   
-  input[type="text"] {
+input[type="text"] {
     padding: 6px;
     margin-top: 8px;
     font-size: 17px;
     border: none;
     border-radius: 4px;
     border-right: 5px;
-  }
+}
   
-  .find {
+.find {
     margin-right: 1em;
-  }
+}
