@@ -1,14 +1,9 @@
-/*
-*Psuedocode 
-TODO: create event listener for the category button pressed 
-    *Populate the main article and sub-articles with the news category type
-TODO: Populate/Fetch the side bar with the top stories API as cards, limit with 3
-    *Add refresh button to the side bar 
-TODO: Populate/Fetch the main article
-    *Change the body header to the category type
-TODO: Add hover effects to articles to show the abstract/summary
-TODO: Change 
-*/
+var btn = document.getElementById("myBtn");
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+var sidebarEL =document.querySelector(".newssidebar");
+const APIkey = "L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
+
 
 //!API KEYS:
 //* L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY
@@ -32,6 +27,7 @@ TODO: Change
     var mainArticleToolTipText = document.getElementById("tooltiptext");
     var navigationBar = document.getElementById("navigationBar");
     
+
     if (localStorage.getItem("lastCategory")){
         GetMainArticleTopStory(localStorage.getItem("lastCategory"));
     } else {
@@ -124,3 +120,69 @@ TODO: Change
     span.onclick = function() {
         modal.style.display = "none";
       }
+>>>>>>> main
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+
+
+
+//Populate side bar
+// function sidebararticles(topstoriesurl){
+  //Clear out daily forecast
+  // $( ".newssidebar" ).empty();
+
+  var topstoriesurl = 'https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY'
+
+  fetch(topstoriesurl)
+      .then(function(response){
+          return response.json();
+      })
+      
+      .then(function(data){
+        console.log("here it is",data)
+        sidebarEL.innerHTML=" "
+
+        var topstorylist = data.results
+        for (var i = 0; i <=3; i++) {
+          
+
+          var title;
+          var blurb;
+          var picture;
+
+          title = topstorylist[i].title
+          console.log("TITLE",title)
+          blurb =topstorylist[i].abstract
+          var mediaData = topstorylist[i].media[0]
+          picture=mediaData['media-metadata'][1].url
+
+          
+
+          //make cards
+          var storycard = document.createElement("div");
+          storycard.classList.add("max-w-sm","rounded","overflow-hidden","shadow-lg")
+          
+          //create card body
+          var cardBody = document.createElement("div");
+          cardBody.classList.add("px-6","py-4")
+
+          title = topstorylist[i].title
+          blurb =topstorylist[i].abstract
+          cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
+                                  <img src= "${picture}"> </><br>
+                                   <p class="text-sm">${blurb}<p><br>`
+
+
+          storycard.appendChild(cardBody);
+          sidebarEL.append(storycard)
+          
+        }
+
+
+      
+      })
