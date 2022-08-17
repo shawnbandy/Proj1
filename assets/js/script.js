@@ -93,8 +93,6 @@ TODO: Change
     
     function GetOtherNewsStory(categoryOfNews){
     
-        currentCategory.textContent = categoryOfNews;
-    
         var requestURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + categoryOfNews + "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
 
         fetch(requestURL)
