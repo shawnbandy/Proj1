@@ -140,18 +140,18 @@ TODO: Change
       }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+    span.onclick = function() {
+         modal.style.display = "none";
+    }
 
 
 
 
 
 //Populate side bar
-function sidebararticles(topstoriesurl){
+// function sidebararticles(topstoriesurl){
   //Clear out daily forecast
-  $( ".newssidebar" ).empty();
+  // $( ".newssidebar" ).empty();
 
   var topstoriesurl = 'https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY'
 
@@ -199,8 +199,6 @@ function sidebararticles(topstoriesurl){
           sidebarEL.append(storycard)
           
         }
-
-
       
-      })
-    }
+      });
+    
