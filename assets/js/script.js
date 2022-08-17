@@ -88,7 +88,6 @@ TODO: Change
     
             })
     
-    
     }
     
     function GetOtherNewsStory(categoryOfNews){
