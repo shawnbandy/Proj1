@@ -15,6 +15,7 @@ const fetchData = async () => {
       
                 <div>
                   <img 
+                
                   src="https://www.nytimes.com/${article.multimedia[0].url}"
                   alt="placeholder"
                   />
