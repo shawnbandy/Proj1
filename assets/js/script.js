@@ -31,12 +31,23 @@ TODO: Change
     var testButton = document.getElementById("testButton");
     var mainArticleToolTipText = document.getElementById("tooltiptext");
     var navigationBar = document.getElementById("navigationBar");
+    var searchButton = document.getElementById("searchButton");
+    var searchInput = document.getElementById("searchInput");
     
-    if (localStorage.getItem("lastCategory")){
+    
+    
+    if (localStorage.getItem("lastCategory") == "US" ||
+        localStorage.getItem("lastCategory") == "Politics" ||
+        localStorage.getItem("lastCategory") == "Sports" ||
+        localStorage.getItem("lastCategory") == "Business" ||
+        localStorage.getItem("lastCategory") == "Insider"
+    ){
         GetMainArticleTopStory(localStorage.getItem("lastCategory"));
-    } else {
-        GetMainArticleTopStory("Home")
-    }
+    } else if (localStorage.getItem("lastCategory")){
+
+        GetOtherNewsStory(localStorage.getItem("lastCategory"));
+
+    } else {GetMainArticleTopStory("Home")}
     
     navigationBar.addEventListener("click", function(event){
         event.preventDefault;
@@ -44,12 +55,12 @@ TODO: Change
         GetMainArticleTopStory(event.target.textContent);
     })
     
-    testButton.addEventListener("click", function(){
-        var category = "Arts";
-        GetMainArticleTopStory(category);
-        console.log(category);
+    searchButton.addEventListener("click", function(event){
+        event.preventDefault;
+        localStorage.setItem("lastCategory", searchInput.value);
+        console.log(searchInput.value)
+        GetOtherNewsStory(searchInput.value);
     })
-    
     
     
     function GetMainArticleTopStory(categoryOfNews){
@@ -84,19 +95,20 @@ TODO: Change
     
         currentCategory.textContent = categoryOfNews;
     
-        var requestURL = "https://api.nytimes.com/svc/semantic/v2/concept/name/nytd_des/" + categoryOfNews + ".json?fields=all&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
-    
+        var requestURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + categoryOfNews + "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
+
         fetch(requestURL)
             .then(function(response){
                 return response.json()
             })
             .then(function(data){
                 console.log(data)
-                var articleImage = data.results[0].multimedia[0].url;
-                var articleTitle = data.results[0].title;
-                var articleDescription = data.results[0].abstract;
-                var articleHover = data.results[0].multimedia[0].caption;
-                var articleLink = data.results[0].url
+                currentCategory.textContent = data.response.docs[0].type_of_material;
+                var articleImage = "https://www.nytimes.com/" + data.response.docs[0].multimedia[0].url;
+                var articleTitle = data.response.docs[0].headline.main;
+                var articleDescription = data.response.docs[0].abstract;
+                var articleHover = data.response.docs[0].snippet;
+                var articleLink = data.response.docs[0].web_url;
     
                 mainArticleToolTipText.textContent = articleHover;
                 mainArticleTitle.textContent = articleTitle;
@@ -107,6 +119,8 @@ TODO: Change
     
         
     }
+
+
     
     
     

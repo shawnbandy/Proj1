@@ -34,17 +34,17 @@
       <h1 class="pb-3"></h1>
       <div class="navbar">
         <div id="navigationBar" class="navigation">
-          <a href="#sports">Sports</a>
-          <a href="#science">Science</a>
-          <a href="#politics">Politics</a>
-          <a href="#economics">Economics</a>
-          <a href="#celebrity">Celebrity</a>
+          <a href="#sports">US</a>
+          <a href="#science">Politics</a>
+          <a href="#politics">Sports</a>
+          <a href="#economics">Business</a>
+          <a href="#celebrity">Insider</a>
         </div>
         <div class="find">
           <div class="search-bar"></div>
-          <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search" />
-            <button type="submit"><i class="fa fa-search"></i>t</button>
+          <form>
+            <input id="searchInput" type="text" placeholder="Search.." name="search" />
+            <button id="searchButton" type="submit">🔍</button>
           </form>
         </div>
       </div>
@@ -100,7 +100,7 @@
       </aside>
 
           <!--*Main body-->
-      <section class="text-center border border-black h-screen w-5/6">
+      <section class="text-center border border-black h-auto w-auto">
 
             <div id="currentCategory" class="border border-green-500 h-16 m-1 flex items-center justify-center">
               <p>this will be the main body header. CATEGORY: TYPE</p>
@@ -112,7 +112,7 @@
                   <p>Main article title</p>
                   <button id="testButton">testbutton</button>
                 </div>
-                <figure class="border border-green-600 h-5/6 m-1 tooltip w-1/2">
+                <figure class="border border-green-600 h-5/6 m-1 tooltip w-auto">
                   <a id="mainArticleLink" href="#" target="_blank">
                     <img 
                     class="object-fit w-full h-full"
@@ -128,7 +128,7 @@
               </div>
             </div>
 
-            <div class="flex justify-evenly border border-blue-500 h-2/6 m-1">
+            <div class="flex justify-evenly border border-blue-500 h-2/6 m-1 mt-10">
               <div class="column m-1">
                 <p>article 1</p>
                 <div>
@@ -191,10 +191,15 @@
           <input type="email" name="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
         </label>
       </div>
-    
     </div>
 
     </main>
+
+    <footer class="text-center h-auto border border-black w-screen bg-sky-400">
+      <p>this will be the footer</p>
+      <button class="cursor-pointer" id="myBtn">Subscribe</button>
+      <p>testing height auto</p>
+    </footer>
 
 
         <script type= "text/javascript" src="assets/js/script.js"></script>
