@@ -15,140 +15,129 @@ TODO: Change
 //*This has access to: Archive, Article Search, Most Popular, Times Wire, and Top Stories
 
 //*Top Stories:
-    //?Arts, homes, science, US, world
+//?Arts, homes, science, US, world
 //*Times Wire:
-    //?Business, World, All
+//?Business, World, All
 //*Most Popular:
-    //?Most shared on FB, most emailed articles, most viewed articles
+//?Most shared on FB, most emailed articles, most viewed articles
 
+var mainArticleTitle = document.getElementById("mainArticleTitle");
+var mainArticleImage = document.getElementById("mainArticleImage");
+var mainArticleDescription = document.getElementById("mainArticleDescription");
+var mainArticleLink = document.getElementById("mainArticleLink");
+var currentCategory = document.getElementById("currentCategory");
+var testButton = document.getElementById("testButton");
+var mainArticleToolTipText = document.getElementById("tooltiptext");
+var navigationBar = document.getElementById("navigationBar");
+var searchButton = document.getElementById("searchButton");
+var searchInput = document.getElementById("searchInput");
 
+if (
+  localStorage.getItem("lastCategory") == "US" ||
+  localStorage.getItem("lastCategory") == "Politics" ||
+  localStorage.getItem("lastCategory") == "Sports" ||
+  localStorage.getItem("lastCategory") == "Business" ||
+  localStorage.getItem("lastCategory") == "Insider"
+) {
+  GetMainArticleTopStory(localStorage.getItem("lastCategory"));
+} else if (localStorage.getItem("lastCategory")) {
+  GetOtherNewsStory(localStorage.getItem("lastCategory"));
+} else {
+  GetMainArticleTopStory("Home");
+}
 
-    var mainArticleTitle = document.getElementById("mainArticleTitle");
-    var mainArticleImage = document.getElementById("mainArticleImage");
-    var mainArticleDescription = document.getElementById("mainArticleDescription");
-    var mainArticleLink = document.getElementById("mainArticleLink");
-    var currentCategory = document.getElementById("currentCategory");
-    var testButton = document.getElementById("testButton");
-    var mainArticleToolTipText = document.getElementById("tooltiptext");
-    var navigationBar = document.getElementById("navigationBar");
-    var searchButton = document.getElementById("searchButton");
-    var searchInput = document.getElementById("searchInput");
-    
-    
-    
-    if (localStorage.getItem("lastCategory") == "US" ||
-        localStorage.getItem("lastCategory") == "Politics" ||
-        localStorage.getItem("lastCategory") == "Sports" ||
-        localStorage.getItem("lastCategory") == "Business" ||
-        localStorage.getItem("lastCategory") == "Insider"
-    ){
-        GetMainArticleTopStory(localStorage.getItem("lastCategory"));
-    } else if (localStorage.getItem("lastCategory")){
+navigationBar.addEventListener("click", function (event) {
+  event.preventDefault;
+  localStorage.setItem("lastCategory", event.target.textContent);
+  GetMainArticleTopStory(event.target.textContent);
+});
 
-        GetOtherNewsStory(localStorage.getItem("lastCategory"));
+searchButton.addEventListener("click", function (event) {
+  event.preventDefault;
+  localStorage.setItem("lastCategory", searchInput.value);
+  console.log(searchInput.value);
+  GetOtherNewsStory(searchInput.value);
+});
 
-    } else {GetMainArticleTopStory("Home")}
-    
-    navigationBar.addEventListener("click", function(event){
-        event.preventDefault;
-        localStorage.setItem("lastCategory", event.target.textContent);
-        GetMainArticleTopStory(event.target.textContent);
+function GetMainArticleTopStory(categoryOfNews) {
+  currentCategory.textContent = categoryOfNews;
+
+  var requestURL =
+    "https://api.nytimes.com/svc/topstories/v2/" +
+    categoryOfNews +
+    ".json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
+
+  fetch(requestURL)
+    .then(function (response) {
+      return response.json();
     })
-    
-    searchButton.addEventListener("click", function(event){
-        event.preventDefault;
-        localStorage.setItem("lastCategory", searchInput.value);
-        console.log(searchInput.value)
-        GetOtherNewsStory(searchInput.value);
+    .then(function (data) {
+      var articleImage = data.results[0].multimedia[0].url;
+      var articleTitle = data.results[0].title;
+      var articleDescription = data.results[0].abstract;
+      var articleHover = data.results[0].multimedia[0].caption;
+      var articleLink = data.results[0].url;
+
+      mainArticleToolTipText.textContent = articleHover;
+      mainArticleTitle.textContent = articleTitle;
+      mainArticleDescription.textContent = articleDescription;
+      mainArticleImage.src = articleImage;
+      mainArticleLink.href = articleLink;
+    });
+}
+
+function GetOtherNewsStory(categoryOfNews) {
+  var requestURL =
+    "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+    categoryOfNews +
+    "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
+
+  fetch(requestURL)
+    .then(function (response) {
+      return response.json();
     })
-    
-    
-    function GetMainArticleTopStory(categoryOfNews){
-    
-        currentCategory.textContent = categoryOfNews;
-        
-        var requestURL = "https://api.nytimes.com/svc/topstories/v2/" + categoryOfNews + ".json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
-    
-        fetch(requestURL)
-            .then(function(response){
-                return response.json();
-            })
-            .then(function(data){
-                var articleImage = data.results[0].multimedia[0].url;
-                var articleTitle = data.results[0].title;
-                var articleDescription = data.results[0].abstract;
-                var articleHover = data.results[0].multimedia[0].caption;
-                var articleLink = data.results[0].url
-    
-                mainArticleToolTipText.textContent = articleHover;
-                mainArticleTitle.textContent = articleTitle;
-                mainArticleDescription.textContent = articleDescription;
-                mainArticleImage.src = articleImage;
-                mainArticleLink.href = articleLink
-    
-            })
-    
-    }
-    
-    function GetOtherNewsStory(categoryOfNews){
-    
-        var requestURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + categoryOfNews + "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
+    .then(function (data) {
+      console.log(data);
+      currentCategory.textContent = data.response.docs[0].type_of_material;
+      var articleImage =
+        "https://www.nytimes.com/" + data.response.docs[0].multimedia[0].url;
+      var articleTitle = data.response.docs[0].headline.main;
+      var articleDescription = data.response.docs[0].abstract;
+      var articleHover = data.response.docs[0].snippet;
+      var articleLink = data.response.docs[0].web_url;
 
-        fetch(requestURL)
-            .then(function(response){
-                return response.json()
-            })
-            .then(function(data){
-                console.log(data)
-                currentCategory.textContent = data.response.docs[0].type_of_material;
-                var articleImage = "https://www.nytimes.com/" + data.response.docs[0].multimedia[0].url;
-                var articleTitle = data.response.docs[0].headline.main;
-                var articleDescription = data.response.docs[0].abstract;
-                var articleHover = data.response.docs[0].snippet;
-                var articleLink = data.response.docs[0].web_url;
-    
-                mainArticleToolTipText.textContent = articleHover;
-                mainArticleTitle.textContent = articleTitle;
-                mainArticleDescription.textContent = articleDescription;
-                mainArticleImage.src = articleImage;
-                mainArticleLink.href = articleLink;
-            })
-    
-        
-    }
+      mainArticleToolTipText.textContent = articleHover;
+      mainArticleTitle.textContent = articleTitle;
+      mainArticleDescription.textContent = articleDescription;
+      mainArticleImage.src = articleImage;
+      mainArticleLink.href = articleLink;
+    });
+}
 
+//!LEO'S SECTION
+var btn = document.getElementById("myBtn");
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+var sidebarEL = document.querySelector(".newssidebar");
+const APIkey = "L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
-    
-    
-    
-    //!LEO'S SECTION
-    var btn = document.getElementById("myBtn");
-    var modal = document.getElementById("myModal");
-    var span = document.getElementsByClassName("close")[0];
-    var sidebarEL =document.querySelector(".newssidebar");
-    const APIkey = "L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
-    
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-        
-      }
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-      }
+// When the user clicks the button, open the modal
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
 
 // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-         modal.style.display = "none";
-    }
-
-
-
-
+span.onclick = function () {
+  modal.style.display = "none";
+};
 
 //Populate side bar
 // function sidebararticles(topstoriesurl){
+
   //Clear out daily forecast
   // $( ".newssidebar" ).empty();
 
@@ -194,10 +183,8 @@ TODO: Change
                                    <p class="text-sm">${blurb}<p><br>`
 
 
-          storycard.appendChild(cardBody);
-          sidebarEL.append(storycard)
-          
-        }
-      
-      });
-    
+
+      storycard.appendChild(cardBody);
+      sidebarEL.append(storycard);
+    }
+  });
