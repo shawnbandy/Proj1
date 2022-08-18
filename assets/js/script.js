@@ -138,51 +138,59 @@ span.onclick = function () {
 //Populate side bar
 // function sidebararticles(topstoriesurl){
 
-  //Clear out daily forecast
-  // $( ".newssidebar" ).empty();
+//Clear out daily forecast
+// $( ".newssidebar" ).empty();
 
-  var topstoriesurl = 'https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY'
+var topstoriesurl =
+  "https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
-  fetch(topstoriesurl)
-      .then(function(response){
-          return response.json();
-      })
-      
-      .then(function(data){
-        console.log("here it is",data)
-        sidebarEL.innerHTML=" "
+fetch(topstoriesurl)
+  .then(function (response) {
+    return response.json();
+  })
 
-        var topstorylist = data.results
-        for (var i = 0; i <=3; i++) {
-          
+  .then(function (data) {
+    console.log("here it is", data);
+    sidebarEL.innerHTML = " ";
 
-          var title;
-          var blurb;
-          var picture;
+    var topstorylist = data.results;
+    for (var i = 0; i <= 3; i++) {
+      var title;
+      var blurb;
+      var picture;
 
-          title = topstorylist[i].title
-          console.log("TITLE",title)
-          blurb =topstorylist[i].abstract
-          var mediaData = topstorylist[i].media[0]
-          picture=mediaData['media-metadata'][1].url
+      title = topstorylist[i].title;
+      console.log("TITLE", title);
+      blurb = topstorylist[i].abstract;
+      var mediaData = topstorylist[i].media[0];
+      picture = mediaData["media-metadata"][1].url;
 
-          
+      //make cards
+      var storycard = document.createElement("div");
+      storycard.classList.add(
+        "max-w-sm",
+        "rounded",
+        "overflow-hidden",
+        "shadow-2xl",
+        "p-3",
+        "m-3",
+        "sidebarcards",
+        "bg-teal-50",
+        "drop-shadow-2xl",
+        "transition",
+        "hover:-translate-y-1",
+        "hover:scale-110"
+      );
 
-          //make cards
-          var storycard = document.createElement("div");
-          storycard.classList.add("max-w-sm","rounded","overflow-hidden","shadow-lg","sidebarcards")
-          
-          //create card body
-          var cardBody = document.createElement("div");
-          cardBody.classList.add("px-6","py-4")
+      //create card body
+      var cardBody = document.createElement("div");
+      cardBody.classList.add("px-6", "py-4");
 
-          title = topstorylist[i].title
-          blurb =topstorylist[i].abstract
-          cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
+      title = topstorylist[i].title;
+      blurb = topstorylist[i].abstract;
+      cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
                                   <img class="w-full" src= "${picture}"> </><br>
-                                   <p class="text-sm">${blurb}<p><br>`
-
-
+                                   <p class="text-sm">${blurb}<p><br>`;
 
       storycard.appendChild(cardBody);
       sidebarEL.append(storycard);
