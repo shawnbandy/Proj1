@@ -1,13 +1,13 @@
 /*
 *Psuedocode 
-TODO: create event listener for the category button pressed 
+//TODO: create event listener for the category button pressed 
     *Populate the main article and sub-articles with the news category type
 TODO: Populate/Fetch the side bar with the top stories API as cards, limit with 3
     *Add refresh button to the side bar 
-TODO: Populate/Fetch the main article
+//TODO: Populate/Fetch the main article
     *Change the body header to the category type
-TODO: Add hover effects to articles to show the abstract/summary
-TODO: Change 
+//TODO: Add hover effects to articles to show the abstract/summary
+//TODO: Change 
 */
 
 //!API KEYS:
@@ -80,8 +80,6 @@ if (localStorage.getItem("currentArticleIndex")){
 nextButton.addEventListener("click", function(){
     currentArticleIndex++;
     localStorage.setItem("currentArticleIndex", currentArticleIndex);
-    console.log("Next button hit");
-    console.log(currentArticleIndex);
 
     if (MainOrOtherArticleChecker(globalCategory) == true) {
         GetMainArticleTopStory(globalCategory, true);
@@ -94,8 +92,6 @@ prevButton.addEventListener("click", function(){
     }
     currentArticleIndex--;
     localStorage.setItem("currentArticleIndex", currentArticleIndex)
-    console.log("Prev button hit");
-    console.log(currentArticleIndex);
 
     if (MainOrOtherArticleChecker(globalCategory) == true) {
         GetMainArticleTopStory(globalCategory, false);
@@ -123,7 +119,11 @@ function GetMainArticleTopStory(categoryOfNews, forward) {
 
   fetch(requestURL)
     .then(function (response) {
+      if (response.status == 429){
+        console.log("Too many requests!! Try again in a minute.")
+      }
       return response.json();
+      
     })
     .then(function (data) {
 
@@ -137,8 +137,6 @@ function GetMainArticleTopStory(categoryOfNews, forward) {
             } 
        }
 
-
-
       var articleImage = data.results[currentArticleIndex].multimedia[0].url;
       var articleTitle = data.results[currentArticleIndex].title;
       var articleDescription = data.results[currentArticleIndex].abstract;
@@ -150,6 +148,8 @@ function GetMainArticleTopStory(categoryOfNews, forward) {
       mainArticleDescription.textContent = articleDescription;
       mainArticleImage.src = articleImage;
       mainArticleLink.href = articleLink;
+
+      localStorage.setItem("currentArticleIndex", currentArticleIndex)
 
     });
 }
