@@ -182,7 +182,7 @@ TODO: Change
 
           //make cards
           var storycard = document.createElement("div");
-          storycard.classList.add("max-w-sm","rounded","overflow-hidden","shadow-lg")
+          storycard.classList.add("max-w-sm","rounded","overflow-hidden","shadow-lg","sidebarcards")
           
           //create card body
           var cardBody = document.createElement("div");
@@ -191,7 +191,7 @@ TODO: Change
           title = topstorylist[i].title
           blurb =topstorylist[i].abstract
           cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
-                                  <img src= "${picture}"> </><br>
+                                  <img class="w-full" src= "${picture}"> </><br>
                                    <p class="text-sm">${blurb}<p><br>`
 
 
