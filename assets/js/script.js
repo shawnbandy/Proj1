@@ -21,18 +21,6 @@ TODO: Change
 //*Most Popular:
 //?Most shared on FB, most emailed articles, most viewed articles
 
-var a = 1;
-function outer(){
-    var a = 2;
-    function inner(){
-        a++;
-    console.log(a);
-        var a = 5;
-    }
-    inner();
-}
-outer();
-console.log(a)
 
 var mainArticleTitle = document.getElementById("mainArticleTitle");
 var mainArticleImage = document.getElementById("mainArticleImage");
@@ -49,13 +37,8 @@ var prevButton = document.getElementById("prevBut");
 
 
 //*this checks localStorage for the last Category, and then runs either MainArticle or OtherNews depending on parameters. If there is no LS, it will default to Home page -SC
-if (
-  localStorage.getItem("lastCategory") == "US" ||
-  localStorage.getItem("lastCategory") == "Politics" ||
-  localStorage.getItem("lastCategory") == "Sports" ||
-  localStorage.getItem("lastCategory") == "Business" ||
-  localStorage.getItem("lastCategory") == "Insider"
-) {
+var mainArticleArray = ["US", "Politics", "Sports", "Business", "Insider"];
+if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
   GetMainArticleTopStory(localStorage.getItem("lastCategory"));
 } else if (localStorage.getItem("lastCategory")) {
   GetOtherNewsStory(localStorage.getItem("lastCategory"));
@@ -117,15 +100,13 @@ prevButton.addEventListener("click", function(){
     if (MainOrOtherArticleChecker(globalCategory) == true) {
         GetMainArticleTopStory(globalCategory);
     } else {GetOtherNewsStory(globalCategory)}
-})
 
-console.log(MainOrOtherArticleChecker("US"));
+})
 
 
 function MainOrOtherArticleChecker(string){
     //*true will be a main article, false will be other
     var mainOrOther = false;
-    var mainArticleArray = ["US", "Politics", "Sports", "Business", "Insider"];
     if (mainArticleArray.includes(string)){
         mainOrOther = true;
     }
@@ -145,17 +126,16 @@ function GetMainArticleTopStory(categoryOfNews) {
       return response.json();
     })
     .then(function (data) {
-      var articleIndex = currentArticleIndex
-       if (data.results[articleIndex].multimedia == null){
-            articleIndex++;
-            console.log("art " + articleIndex)
+
+       while (data.results[currentArticleIndex].multimedia == null){
+            currentArticleIndex++;
        } 
 
-      var articleImage = data.results[articleIndex].multimedia[0].url;
-      var articleTitle = data.results[articleIndex].title;
-      var articleDescription = data.results[articleIndex].abstract;
-      var articleHover = data.results[articleIndex].multimedia[0].caption;
-      var articleLink = data.results[articleIndex].url;
+      var articleImage = data.results[currentArticleIndex].multimedia[0].url;
+      var articleTitle = data.results[currentArticleIndex].title;
+      var articleDescription = data.results[currentArticleIndex].abstract;
+      var articleHover = data.results[currentArticleIndex].multimedia[0].caption;
+      var articleLink = data.results[currentArticleIndex].url;
 
       mainArticleToolTipText.textContent = articleHover;
       mainArticleTitle.textContent = articleTitle;
@@ -174,6 +154,7 @@ function GetOtherNewsStory(categoryOfNews) {
       return response.json();
     })
     .then(function (data) {
+        
       console.log(data);
       currentCategory.textContent = data.response.docs[currentArticleIndex].type_of_material;
       var articleImage = "https://www.nytimes.com/" + data.response.docs[currentArticleIndex].multimedia[0].url;
