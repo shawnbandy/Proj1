@@ -219,7 +219,10 @@ span.onclick = function () {
         sidebarEL.innerHTML=" "
 
         var topstorylist = data.results
+
         for (var i = 0; i <=3; i++) {
+
+          console.log("i is " + i);
           
 
           var title;
@@ -229,8 +232,13 @@ span.onclick = function () {
           title = topstorylist[i].title
           console.log("TITLE",title)
           blurb =topstorylist[i].abstract
-          var mediaData = topstorylist[i].media[0]
-          picture=mediaData['media-metadata'][1].url
+          var mediaData = topstorylist[i].media[0] //data.results[i].media[0]
+
+          if (topstorylist[i].media.length == 0){
+            picture = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+          } else { picture = mediaData['media-metadata'][1].url }
+
+          //picture = mediaData['media-metadata'][1].url
 
           
 
