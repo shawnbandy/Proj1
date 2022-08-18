@@ -21,9 +21,9 @@ header {
   text-decoration: none;
 }
 
-.navbar a:hover {
+/* .navbar a:hover {
   background-color: white;
-}
+} */
 
 input[type="text"] {
   padding: 6px;
