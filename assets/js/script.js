@@ -84,8 +84,8 @@ nextButton.addEventListener("click", function(){
     console.log(currentArticleIndex);
 
     if (MainOrOtherArticleChecker(globalCategory) == true) {
-        GetMainArticleTopStory(globalCategory);
-    } else {GetOtherNewsStory(globalCategory)}
+        GetMainArticleTopStory(globalCategory, true);
+    } else {GetOtherNewsStory(globalCategory, true)}
 })
 
 prevButton.addEventListener("click", function(){
@@ -98,8 +98,8 @@ prevButton.addEventListener("click", function(){
     console.log(currentArticleIndex);
 
     if (MainOrOtherArticleChecker(globalCategory) == true) {
-        GetMainArticleTopStory(globalCategory);
-    } else {GetOtherNewsStory(globalCategory)}
+        GetMainArticleTopStory(globalCategory, false);
+    } else {GetOtherNewsStory(globalCategory, false)}
 
 })
 
@@ -115,7 +115,7 @@ function MainOrOtherArticleChecker(string){
 
 
 
-function GetMainArticleTopStory(categoryOfNews) {
+function GetMainArticleTopStory(categoryOfNews, forward) {
   currentCategory.textContent = categoryOfNews;
 
   var requestURL =
@@ -127,9 +127,17 @@ function GetMainArticleTopStory(categoryOfNews) {
     })
     .then(function (data) {
 
-       while (data.results[currentArticleIndex].multimedia == null){
-            currentArticleIndex++;
-       } 
+       if (forward == true && data.results[currentArticleIndex].multimedia == null){
+            while (data.results[currentArticleIndex].multimedia == null){
+                currentArticleIndex++;
+            } 
+       } else if (forward == false && data.results[currentArticleIndex].multimedia == null){
+            while (data.results[currentArticleIndex].multimedia == null){
+                currentArticleIndex--;
+            } 
+       }
+
+
 
       var articleImage = data.results[currentArticleIndex].multimedia[0].url;
       var articleTitle = data.results[currentArticleIndex].title;
@@ -154,7 +162,7 @@ function GetOtherNewsStory(categoryOfNews) {
       return response.json();
     })
     .then(function (data) {
-        
+
       console.log(data);
       currentCategory.textContent = data.response.docs[currentArticleIndex].type_of_material;
       var articleImage = "https://www.nytimes.com/" + data.response.docs[currentArticleIndex].multimedia[0].url;
