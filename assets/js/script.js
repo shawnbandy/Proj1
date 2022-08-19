@@ -62,6 +62,7 @@ navigationBar.addEventListener("click", function (event) {
   currentArticleIndex = 0;
   globalCategory = event.target.textContent;
   GetMainArticleTopStory(event.target.textContent);
+  fetchData(event.target.textContent)
 });
 
 //*populates the main page w/ descriptions when a search is made -SC
@@ -356,9 +357,12 @@ var topstoriesurl =
 
 let articlesWrapper = document.querySelector(".articles-wrapper");
 
-const fetchData = async () => {
+const fetchData = async (categoryOfNews) => {
+  currentCategory.textContent = categoryOfNews
   const res = await fetch(
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY`
+    "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+    categoryOfNews +
+    "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
   );
   const data = await res.json();
   console.log(data.response.docs);
@@ -366,14 +370,20 @@ const fetchData = async () => {
     articlesWrapper.innerHTML = "";
   } 
   data?.response?.docs?.forEach((article) => {
+    if (article.multimedia.length == 0) {
+      picture =
+        "https://www.freeiconspng.com/uploads/no-image-icon-15.png";
+    } else {
+      picture = article.multimedia[0].url;
+    }
+    console.log("HEEEEEY",article)
     articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300">
                <p class="text-sm">${article.headline.main}</p>
-               
-                 <img
+               <img
                  class= "h-3/4 object-cover self-end"
-                 src="https://www.nytimes.com/${article.multimedia[0].url}"
+                 src="https://www.nytimes.com/${picture}"
                  alt="placeholder"
-                 />
+                 />      
                </div>
              `;
   });
