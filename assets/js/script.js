@@ -201,9 +201,7 @@ function GetOtherNewsStory(categoryOfNews) {
       console.log(data);
       currentCategory.textContent =
         data.response.docs[currentArticleIndex].type_of_material;
-      var articleImage =
-        "https://www.nytimes.com/" +
-        data.response.docs[currentArticleIndex].multimedia[0].url;
+      var articleImage = "https://www.nytimes.com/" + data.response.docs[currentArticleIndex].multimedia[0].url;
       var articleTitle = data.response.docs[currentArticleIndex].headline.main;
       var articleDescription = data.response.docs[currentArticleIndex].abstract;
       var articleHover = data.response.docs[currentArticleIndex].snippet;
@@ -253,13 +251,13 @@ var topstoriesurl =
       })
 
   .then(function (data) {
-    console.log("here it is", data);
+    //console.log("here it is", data);
     sidebarEL.innerHTML = " ";
 
     var topstorylist = data.results;
 
     for (var i = 0; i <= 3; i++) {
-          console.log("i is " + i);
+          //console.log("i is " + i);
 
           var title;
           var blurb;
@@ -267,12 +265,12 @@ var topstoriesurl =
           var sidelink
 
           title = topstorylist[i].title
-          console.log("TITLE",title)
+          //console.log("TITLE",title)
           blurb =topstorylist[i].abstract
           var mediaData = topstorylist[i].media[0] //data.results[i].media[0]
           sidelink =topstorylist[i].url;
 
-          console.log("LINK",sidelink)
+          //console.log("LINK",sidelink)
 
  
 
@@ -288,19 +286,21 @@ var topstoriesurl =
           //!make cards
           var storycard = document.createElement("div");
       storycard.classList.add(
-        "lg:max-w-sm",
+        "flex",
+        "justify-center",
+        "content-evenly",
+        "justify-evenly",
+        "sm:w-full",
         "rounded",
         "overflow-hidden",
         "shadow-2xl",
-        "p-3",
-        "m-3",
         "sidebarcards",
         "bg-teal-50",
         "drop-shadow-2xl",
         "transition",
         "hover:-translate-y-1",
         "hover:scale-110",
-
+        "lg:w-full"
       );
           
           //create card body
@@ -334,7 +334,7 @@ var topstoriesurl =
                                 
                                 })
                                 abc.addEventListener("click",Copyer)
-                                console.log("WHAT HAPPENS",Copyer)
+                                //console.log("WHAT HAPPENS",Copyer)
                                 cardBody.appendChild(abc)
 //                                 <span class="linkshare material-symbols-outlined">
 // content_copy
@@ -364,20 +364,20 @@ const fetchData = async () => {
   console.log(data.response.docs);
   if (data) {
     articlesWrapper.innerHTML = "";
-  }
+  } 
   data?.response?.docs?.forEach((article) => {
-    articlesWrapper.innerHTML += ` <div class="column m-1 box-border w-1/5 p-4 border-4  ">
-               <p>${article.headline.main}</p>
-    
-               <div>
+    articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300">
+               <p class="text-sm">${article.headline.main}</p>
+               
                  <img
-              
+                 class= "h-3/4 object-cover self-end"
                  src="https://www.nytimes.com/${article.multimedia[0].url}"
                  alt="placeholder"
                  />
                </div>
-             </div>`;
+             `;
   });
 };
 
 fetchData();
+
