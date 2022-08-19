@@ -201,9 +201,7 @@ function GetOtherNewsStory(categoryOfNews) {
       console.log(data);
       currentCategory.textContent =
         data.response.docs[currentArticleIndex].type_of_material;
-      var articleImage =
-        "https://www.nytimes.com/" +
-        data.response.docs[currentArticleIndex].multimedia[0].url;
+      var articleImage = "https://www.nytimes.com/" + data.response.docs[currentArticleIndex].multimedia[0].url;
       var articleTitle = data.response.docs[currentArticleIndex].headline.main;
       var articleDescription = data.response.docs[currentArticleIndex].abstract;
       var articleHover = data.response.docs[currentArticleIndex].snippet;
@@ -253,13 +251,13 @@ var topstoriesurl =
       })
 
   .then(function (data) {
-    console.log("here it is", data);
+    //console.log("here it is", data);
     sidebarEL.innerHTML = " ";
 
     var topstorylist = data.results;
 
     for (var i = 0; i <= 3; i++) {
-          console.log("i is " + i);
+          //console.log("i is " + i);
 
           var title;
           var blurb;
@@ -267,12 +265,12 @@ var topstoriesurl =
           var sidelink
 
           title = topstorylist[i].title
-          console.log("TITLE",title)
+          //console.log("TITLE",title)
           blurb =topstorylist[i].abstract
           var mediaData = topstorylist[i].media[0] //data.results[i].media[0]
           sidelink =topstorylist[i].url;
 
-          console.log("LINK",sidelink)
+          //console.log("LINK",sidelink)
 
  
 
@@ -336,7 +334,7 @@ var topstoriesurl =
                                 
                                 })
                                 abc.addEventListener("click",Copyer)
-                                console.log("WHAT HAPPENS",Copyer)
+                                //console.log("WHAT HAPPENS",Copyer)
                                 cardBody.appendChild(abc)
 //                                 <span class="linkshare material-symbols-outlined">
 // content_copy
@@ -368,18 +366,18 @@ const fetchData = async () => {
     articlesWrapper.innerHTML = "";
   } 
   data?.response?.docs?.forEach((article) => {
-    articlesWrapper.innerHTML += `<div class="grid column content-center box-border w-1/5 border-4">
-               <p>${article.headline.main}</p>
-    
-               <div>
+    articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300">
+               <p class="text-sm">${article.headline.main}</p>
+               
                  <img
-                 class= "object-fill w-full h-full"
+                 class= "h-3/4 object-cover self-end"
                  src="https://www.nytimes.com/${article.multimedia[0].url}"
                  alt="placeholder"
                  />
                </div>
-             </div>`;
+             `;
   });
 };
 
 fetchData();
+

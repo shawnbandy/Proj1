@@ -57,7 +57,7 @@
       </div>
     </header>
 
-    <main class="p-6 w-screen flex h-auto sm:grid lg:flex">
+    <main class="p-6 w-screen flex h-100 sm:grid lg:flex justify-evenly content-evenly">
 
           <!--*Sidebar-->
           <aside class="border-solid border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 p-5 m-3 h-100 lg:w-1/4 sm:w-auto sm:flex">
@@ -79,13 +79,16 @@
           </aside>
 
           <!--*Main body-->
-      <section class="text-center h-auto lg:w-3/4 sm:w-full pt-2">
+      <section class="text-center lg:w-4/6 pt-2
+      sm:w-full">
 
             <div id="currentCategory" class="text-3xl uppercase border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-16 m-1 flex items-center justify-center">
               <p></p>
             </div>
             <!--*This is the section for the main article-->
-            <div class="flex flex-col h-2/4 border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 m-1 sm">
+            <div class="flex flex-col h-3/4 border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 m-1 
+            sm:h-auto
+            lg:h-2/4">
               <div class="m-1 border border-4 h-full col-span-3">
                 <div id="mainArticleTitle" class="font-bold border border-4 bg-teal-50 m-3  "></div>
                 <figure class="border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 transition
@@ -113,8 +116,11 @@
               </div>
             </div>
 
-            <!--*this section is for the subarticles-->
-            <div class=" articles-wrapper flex flex-wrap justify-evenly border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-2/5 m-1 mt-10">
+            <!--*this section is for the subarticles, made in JS-->
+            <div id="currentCategory" class="text-3xl uppercase border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-16 m-1 flex items-center justify-center mt-5">
+              <p>You may also like...</p>
+            </div>
+            <div class="articles-wrapper grid grid-cols-5 justify-evenly self-end border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 lg:h-2/6 sm:h-auto">
 
             </div>
             
@@ -128,7 +134,7 @@
         <span style="right: 0; top: 0; position: absolute;" class="close text-sm font-bold cursor-pointer">&times;</span>
         <label style=" top: 50%; -ms-transform:translateY(-50%); transform: rotateY(-50%);" />
           <h3 class="text-center">Keep Up With The Latest News!</h3>
-          <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+          <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 ">
             Name
           </span>
           <input id="firstName" type="name" name="firstname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="First" />
@@ -147,11 +153,10 @@
 
     </main>
 
-    <footer class="text-center h-auto border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-auto  w-screen bg-sky-400">
+    <footer class="text-center border bg-gradient-to-r from-cyan-500 to-cyan-200 h-auto w-screen bg-sky-400">
       <button class="cursor-pointer border border-double border-4 p-4 m-3 rounded-md drop-shadow-2xl bg-slate-200 border-slate-800" id="myBtn">Subscribe</button>
      
     </footer>
-
 
         <script type= "text/javascript" src="assets/js/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
