@@ -231,14 +231,21 @@ fetch(topstoriesurl)
     for (var i = 0; i <= 3; i++) {
       console.log("i is " + i);
 
-      var title;
-      var blurb;
-      var picture;
 
-      title = topstorylist[i].title;
-      console.log("TITLE", title);
-      blurb = topstorylist[i].abstract;
-      var mediaData = topstorylist[i].media[0]; //data.results[i].media[0]
+          var title;
+          var blurb;
+          var picture;
+          var sidelink
+
+          title = topstorylist[i].title
+          console.log("TITLE",title)
+          blurb =topstorylist[i].abstract
+          var mediaData = topstorylist[i].media[0] //data.results[i].media[0]
+          sidelink =topstorylist[i].url;
+
+          console.log("LINK",sidelink)
+
+ 
 
       if (topstorylist[i].media.length == 0) {
         picture =
@@ -270,12 +277,48 @@ fetch(topstoriesurl)
       var cardBody = document.createElement("div");
       cardBody.classList.add("px-6", "py-4");
 
-      title = topstorylist[i].title;
-      blurb = topstorylist[i].abstract;
-      cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
-                                 <img class="w-full" src= "${picture}"> </><br>
-                                   <p class="text-sm">${blurb}<p><br>`;
+          title = topstorylist[i].title
+          blurb =topstorylist[i].abstract
+         
+          
+          cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6> 
+                                <a href="${sidelink}">             
+                                <img class="w-full" src= "${picture}"> </><br>
+                                <p class="text-sm">${blurb}<p><br>
+                                <p id="Copyme">Click Icon to Copy URL<p><p id="Copied"class="hide">Copied!<p>`
 
+                                var Copyman = document.querySelector("#Copyme")
+                                var Copiedman = document.querySelector("#Copied")
+                                function Copyer(){
+                                  Copyman.classList.add("hide")
+                                  Copiedman.classList.remove("hide")
+                                }
+
+                                var abc = document.createElement('span');
+                                abc.setAttribute("class", "linkshare material-symbols-outlined")
+                                abc.textContent = 'content_copy'
+                                abc.addEventListener("click", function(event) {
+                                  console.log("HERE LOOK",event,sidelink)
+                                  event.preventDefault()
+                                  navigator.clipboard.writeText(sidelink)
+                                
+                                })
+                                abc.addEventListener("click",Copyer)
+                                console.log("WHAT HAPPENS",Copyer)
+                                cardBody.appendChild(abc)
+//                                 <span class="linkshare material-symbols-outlined">
+// content_copy
+// </span>`
+
+// const buttoncopy = document.querySelector(".linkshare")
+
+// console.log(buttoncopy)
+
+// buttoncopy.addEventListener("click", navigator.clipboard.writeText(sidelink))
+
+// button.onclick = () => {
+//   navigator.clipboard.writeText(sidelink);
+// }
       storycard.appendChild(cardBody);
       sidebarEL.append(storycard);
     }
