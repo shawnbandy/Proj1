@@ -288,19 +288,21 @@ var topstoriesurl =
           //!make cards
           var storycard = document.createElement("div");
       storycard.classList.add(
-        "lg:max-w-sm",
+        "flex",
+        "justify-center",
+        "content-evenly",
+        "justify-evenly",
+        "sm:w-full",
         "rounded",
         "overflow-hidden",
         "shadow-2xl",
-        "p-3",
-        "m-3",
         "sidebarcards",
         "bg-teal-50",
         "drop-shadow-2xl",
         "transition",
         "hover:-translate-y-1",
         "hover:scale-110",
-
+        "lg:w-full"
       );
           
           //create card body
@@ -364,14 +366,14 @@ const fetchData = async () => {
   console.log(data.response.docs);
   if (data) {
     articlesWrapper.innerHTML = "";
-  }
+  } 
   data?.response?.docs?.forEach((article) => {
-    articlesWrapper.innerHTML += ` <div class="column m-1 box-border w-1/5 p-4 border-4  ">
+    articlesWrapper.innerHTML += `<div class="grid column content-center box-border w-1/5 border-4">
                <p>${article.headline.main}</p>
     
                <div>
                  <img
-              
+                 class= "object-fill w-full h-full"
                  src="https://www.nytimes.com/${article.multimedia[0].url}"
                  alt="placeholder"
                  />

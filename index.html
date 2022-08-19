@@ -32,19 +32,24 @@
       </head>
 
   <body class="container">
-    <header class="text-center h-16 border bg-gradient-to-r from-cyan-500 to-cyan-200 w-screen">
-      <h1 class="pb-3"></h1>
-      <div class="navbar">
-        <div id="navigationBar" class="navigation">
+    <header class="text-center h-16 border bg-gradient-to-r from-cyan-500 to-cyan-200 w-screen 
+    sm:flex sm:justify-center sm:h-auto
+    lg:flex lg:justify-center">
+      <div class="container navbar flex w-full
+      sm:grid sm:grid-cols-1
+      lg:flex">
+        <div id="navigationBar" class="navigation justify-start
+        sm:flex sm:justify-center
+        lg:flex lg:justify-start lg:content-bottom">
           <a href="#sports">US</a>
           <a href="#science">Politics</a>
           <a href="#politics">Sports</a>
           <a href="#economics">Business</a>
           <a href="#celebrity">Insider</a>
         </div>
-        <div class="find">
-          <div class="search-bar"></div>
-          <form>
+        <div class="find
+        lg: justify-end">
+          <form class="justify-end">
             <input id="searchInput" type="text" placeholder="Search.." name="search" />
             <button id="searchButton" type="submit">🔍</button>
           </form>
@@ -55,9 +60,8 @@
     <main class="p-6 w-screen flex h-auto sm:grid lg:flex">
 
           <!--*Sidebar-->
-          <!--*Sidebar-->
-          <aside class="border-solid border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 p-5 m-3 h-auto lg:w-1/4 sm:w-full">
-            <div class="newssidebar">
+          <aside class="border-solid border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 p-5 m-3 h-100 lg:w-1/4 sm:w-auto sm:flex">
+            <div class="newssidebar lg:block sm:flex sm:grid sm:grid-cols-2">
               <div class="max-w-sm rounded overflow-hidden transition">
                 <img class="w-full" src="" alt="Sunset in the mountains">
                 <div class="px-6 py-4">
@@ -75,13 +79,13 @@
           </aside>
 
           <!--*Main body-->
-      <section class="text-center h-auto lg:w-3/4 sm:w-full">
+      <section class="text-center h-auto lg:w-3/4 sm:w-full pt-2">
 
             <div id="currentCategory" class="text-3xl uppercase border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-16 m-1 flex items-center justify-center">
               <p></p>
             </div>
             <!--*This is the section for the main article-->
-            <div class="flex flex-col h-2/4 border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 m-1">
+            <div class="flex flex-col h-2/4 border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 m-1 sm">
               <div class="m-1 border border-4 h-full col-span-3">
                 <div id="mainArticleTitle" class="font-bold border border-4 bg-teal-50 m-3  "></div>
                 <figure class="border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 transition
@@ -109,47 +113,9 @@
               </div>
             </div>
 
+            <!--*this section is for the subarticles-->
             <div class=" articles-wrapper flex flex-wrap justify-evenly border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-2/5 m-1 mt-10">
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 1</p>
-                <div>
-                  <img 
-                  src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                  alt="placeholder"
-                  />
-                </div>
-              </div>
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 2</p>
-                <div>
-                  <img
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg"
-                    alt="placeholder"
-                  />
-                </div>
-              </div>
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 3</p>
-                <div>
-                  <img
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg"
-                    alt="placeholder"
-                  />
-                </div>
-              </div>
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 4</p>
-                <div>
-                  <img
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg"
-                    alt="placeholder"
-                  />
-                </div>
-              </div>
+
             </div>
             
       </section>
