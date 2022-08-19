@@ -104,7 +104,7 @@ prevButton.addEventListener("click", function () {
 
 })
 
-
+//*this will put a user's input into an email array and keep it over multiple sessions
 var emailArray = [];
 if (localStorage.getItem("emailList")){
 
