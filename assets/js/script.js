@@ -282,7 +282,7 @@ var topstoriesurl =
           //make cards
           var storycard = document.createElement("div");
       storycard.classList.add(
-        "max-w-sm",
+        "lg:max-w-sm",
         "rounded",
         "overflow-hidden",
         "shadow-2xl",
@@ -293,7 +293,7 @@ var topstoriesurl =
         "drop-shadow-2xl",
         "transition",
         "hover:-translate-y-1",
-        "hover:scale-110"
+        "hover:scale-110",
       );
           
           //create card body
