@@ -33,6 +33,12 @@ var searchButton = document.getElementById("searchButton");
 var searchInput = document.getElementById("searchInput");
 var nextButton = document.getElementById("nextBut");
 var prevButton = document.getElementById("prevBut");
+var emailSubmitBtn = document.getElementById("emailSubmitBtn");
+var firstNameInput = document.getElementById("firstName");
+var lastNameInput = document.getElementById("lastName");
+var emailInput = document.getElementById("emailInput");
+
+
 
 //*this checks localStorage for the last Category, and then runs either MainArticle or OtherNews depending on parameters. If there is no LS, it will default to Home page -SC
 var mainArticleArray = ["US", "Politics", "Sports", "Business", "Insider"];
@@ -41,13 +47,13 @@ if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
 } else if (localStorage.getItem("lastCategory")) {
   GetOtherNewsStory(localStorage.getItem("lastCategory"));
 } else {
-  GetMainArticleTopStory("Home");
+  GetMainArticleTopStory("home");
 }
 
 var globalCategory;
 if (localStorage.getItem("lastCategory")) {
   globalCategory = localStorage.getItem("lastCategory");
-}
+} 
 
 //*populates the main page w/ descriptions when a navBar element is hit -SC
 navigationBar.addEventListener("click", function (event) {
@@ -75,11 +81,11 @@ if (localStorage.getItem("currentArticleIndex")) {
 }
 
 nextButton.addEventListener("click", function () {
-  currentArticleIndex++;
-  localStorage.setItem("currentArticleIndex", currentArticleIndex);
+    currentArticleIndex++;
+    localStorage.setItem("currentArticleIndex", currentArticleIndex);
 
-  if (MainOrOtherArticleChecker(globalCategory) == true) {
-    GetMainArticleTopStory(globalCategory, true);
+    if (MainOrOtherArticleChecker(globalCategory) == true) {
+        GetMainArticleTopStory(globalCategory, true);
   } else {
     GetOtherNewsStory(globalCategory, true);
   }
@@ -87,25 +93,54 @@ nextButton.addEventListener("click", function () {
 
 prevButton.addEventListener("click", function () {
   if (currentArticleIndex == 0) {
-    return;
-  }
-  currentArticleIndex--;
+        return;
+    }
+    currentArticleIndex--;
   localStorage.setItem("currentArticleIndex", currentArticleIndex);
 
-  if (MainOrOtherArticleChecker(globalCategory) == true) {
-    GetMainArticleTopStory(globalCategory, false);
-  } else {
-    GetOtherNewsStory(globalCategory, false);
-  }
-});
+    if (MainOrOtherArticleChecker(globalCategory) == true) {
+        GetMainArticleTopStory(globalCategory, false);
+    } else {GetOtherNewsStory(globalCategory, false)}
+
+})
+
+
+var emailArray = [];
+if (localStorage.getItem("emailList")){
+
+    emailArray = JSON.parse(localStorage.getItem("emailList"));
+  
+  localStorage.removeItem("emailList");
+  console.log(emailArray);
+}
+
+emailSubmitBtn.addEventListener("click", function(event){
+
+  var input = {
+    firstName: firstNameInput.value,
+    lastName: lastNameInput.value,
+    email: emailInput.value
+  };
+
+  emailArray.push(input)
+
+  localStorage.setItem("emailList", JSON.stringify(emailArray));
+
+  console.log(emailArray);
+
+  emailSubmitBtn.textContent = "Thank you!"
+  emailSubmitBtn.setAttribute("class", "cursor-not-allowed")
+
+})
+
 
 function MainOrOtherArticleChecker(string) {
-  //*true will be a main article, false will be other
-  var mainOrOther = false;
+    //*true will be a main article, false will be other
+    var mainOrOther = false;
   if (mainArticleArray.includes(string)) {
-    mainOrOther = true;
-  }
-  return mainOrOther;
+        mainOrOther = true;
+    }
+    return mainOrOther;
 }
 
 function GetMainArticleTopStory(categoryOfNews, forward) {
@@ -124,21 +159,16 @@ function GetMainArticleTopStory(categoryOfNews, forward) {
       return response.json();
     })
     .then(function (data) {
-      if (
-        forward == true &&
-        data.results[currentArticleIndex].multimedia == null
-      ) {
-        while (data.results[currentArticleIndex].multimedia == null) {
-          currentArticleIndex++;
-        }
-      } else if (
-        forward == false &&
-        data.results[currentArticleIndex].multimedia == null
-      ) {
-        while (data.results[currentArticleIndex].multimedia == null) {
-          currentArticleIndex--;
-        }
-      }
+
+       if (forward == true && data.results[currentArticleIndex].multimedia == null){
+            while (data.results[currentArticleIndex].multimedia == null){
+                currentArticleIndex++;
+            } 
+       } else if (forward == false && data.results[currentArticleIndex].multimedia == null){
+            while (data.results[currentArticleIndex].multimedia == null){
+                currentArticleIndex--;
+            } 
+       }
 
       var articleImage = data.results[currentArticleIndex].multimedia[0].url;
       var articleTitle = data.results[currentArticleIndex].title;
@@ -211,16 +241,16 @@ span.onclick = function () {
 //Populate side bar
 // function sidebararticles(topstoriesurl){
 
-//Clear out daily forecast
-// $( ".newssidebar" ).empty();
+  //Clear out daily forecast
+  // $( ".newssidebar" ).empty();
 
 var topstoriesurl =
   "https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
-fetch(topstoriesurl)
+  fetch(topstoriesurl)
   .then(function (response) {
-    return response.json();
-  })
+          return response.json();
+      })
 
   .then(function (data) {
     console.log("here it is", data);
@@ -229,11 +259,11 @@ fetch(topstoriesurl)
     var topstorylist = data.results;
 
     for (var i = 0; i <= 3; i++) {
-      console.log("i is " + i);
+          console.log("i is " + i);
 
-      var title;
-      var blurb;
-      var picture;
+          var title;
+          var blurb;
+          var picture;
 
       title = topstorylist[i].title;
       console.log("TITLE", title);
@@ -247,10 +277,10 @@ fetch(topstoriesurl)
         picture = mediaData["media-metadata"][1].url;
       }
 
-      //picture = mediaData['media-metadata'][1].url
+          //picture = mediaData['media-metadata'][1].url
 
-      //make cards
-      var storycard = document.createElement("div");
+          //make cards
+          var storycard = document.createElement("div");
       storycard.classList.add(
         "max-w-sm",
         "rounded",
@@ -265,14 +295,14 @@ fetch(topstoriesurl)
         "hover:-translate-y-1",
         "hover:scale-110"
       );
-
-      //create card body
-      var cardBody = document.createElement("div");
+          
+          //create card body
+          var cardBody = document.createElement("div");
       cardBody.classList.add("px-6", "py-4");
 
       title = topstorylist[i].title;
       blurb = topstorylist[i].abstract;
-      cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
+          cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
                                  <img class="w-full" src= "${picture}"> </><br>
                                    <p class="text-sm">${blurb}<p><br>`;
 
