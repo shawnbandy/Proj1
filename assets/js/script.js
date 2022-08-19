@@ -279,7 +279,7 @@ var topstoriesurl =
 
           //picture = mediaData['media-metadata'][1].url
 
-          //make cards
+          //!make cards
           var storycard = document.createElement("div");
       storycard.classList.add(
         "lg:max-w-sm",
@@ -294,6 +294,7 @@ var topstoriesurl =
         "transition",
         "hover:-translate-y-1",
         "hover:scale-110",
+
       );
           
           //create card body
