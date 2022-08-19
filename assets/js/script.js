@@ -21,7 +21,6 @@ TODO: Populate/Fetch the side bar with the top stories API as cards, limit with 
 //*Most Popular:
 //?Most shared on FB, most emailed articles, most viewed articles
 
-
 var mainArticleTitle = document.getElementById("mainArticleTitle");
 var mainArticleImage = document.getElementById("mainArticleImage");
 var mainArticleDescription = document.getElementById("mainArticleDescription");
@@ -35,7 +34,6 @@ var searchInput = document.getElementById("searchInput");
 var nextButton = document.getElementById("nextBut");
 var prevButton = document.getElementById("prevBut");
 
-
 //*this checks localStorage for the last Category, and then runs either MainArticle or OtherNews depending on parameters. If there is no LS, it will default to Home page -SC
 var mainArticleArray = ["US", "Politics", "Sports", "Business", "Insider"];
 if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
@@ -47,9 +45,9 @@ if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
 }
 
 var globalCategory;
-if (localStorage.getItem("lastCategory")){
-    globalCategory = localStorage.getItem("lastCategory")
-} 
+if (localStorage.getItem("lastCategory")) {
+  globalCategory = localStorage.getItem("lastCategory");
+}
 
 //*populates the main page w/ descriptions when a navBar element is hit -SC
 navigationBar.addEventListener("click", function (event) {
@@ -70,77 +68,83 @@ searchButton.addEventListener("click", function (event) {
   GetOtherNewsStory(searchInput.value);
 });
 
-
 //*this will change the current displayed article and descriptions to the next SubArticle -SC
 var currentArticleIndex = 0;
-if (localStorage.getItem("currentArticleIndex")){
-    currentArticleIndex = localStorage.getItem("currentArticleIndex")
+if (localStorage.getItem("currentArticleIndex")) {
+  currentArticleIndex = localStorage.getItem("currentArticleIndex");
 }
 
-nextButton.addEventListener("click", function(){
-    currentArticleIndex++;
-    localStorage.setItem("currentArticleIndex", currentArticleIndex);
+nextButton.addEventListener("click", function () {
+  currentArticleIndex++;
+  localStorage.setItem("currentArticleIndex", currentArticleIndex);
 
-    if (MainOrOtherArticleChecker(globalCategory) == true) {
-        GetMainArticleTopStory(globalCategory, true);
-    } else {GetOtherNewsStory(globalCategory, true)}
-})
+  if (MainOrOtherArticleChecker(globalCategory) == true) {
+    GetMainArticleTopStory(globalCategory, true);
+  } else {
+    GetOtherNewsStory(globalCategory, true);
+  }
+});
 
-prevButton.addEventListener("click", function(){
-    if (currentArticleIndex == 0){
-        return;
-    }
-    currentArticleIndex--;
-    localStorage.setItem("currentArticleIndex", currentArticleIndex)
+prevButton.addEventListener("click", function () {
+  if (currentArticleIndex == 0) {
+    return;
+  }
+  currentArticleIndex--;
+  localStorage.setItem("currentArticleIndex", currentArticleIndex);
 
-    if (MainOrOtherArticleChecker(globalCategory) == true) {
-        GetMainArticleTopStory(globalCategory, false);
-    } else {GetOtherNewsStory(globalCategory, false)}
+  if (MainOrOtherArticleChecker(globalCategory) == true) {
+    GetMainArticleTopStory(globalCategory, false);
+  } else {
+    GetOtherNewsStory(globalCategory, false);
+  }
+});
 
-})
-
-
-function MainOrOtherArticleChecker(string){
-    //*true will be a main article, false will be other
-    var mainOrOther = false;
-    if (mainArticleArray.includes(string)){
-        mainOrOther = true;
-    }
-    return mainOrOther;
+function MainOrOtherArticleChecker(string) {
+  //*true will be a main article, false will be other
+  var mainOrOther = false;
+  if (mainArticleArray.includes(string)) {
+    mainOrOther = true;
+  }
+  return mainOrOther;
 }
-
-
 
 function GetMainArticleTopStory(categoryOfNews, forward) {
   currentCategory.textContent = categoryOfNews;
 
   var requestURL =
-    "https://api.nytimes.com/svc/topstories/v2/" + categoryOfNews + ".json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
+    "https://api.nytimes.com/svc/topstories/v2/" +
+    categoryOfNews +
+    ".json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
   fetch(requestURL)
     .then(function (response) {
-      if (response.status == 429){
-        console.log("Too many requests!! Try again in a minute.")
+      if (response.status == 429) {
+        console.log("Too many requests!! Try again in a minute.");
       }
       return response.json();
-      
     })
     .then(function (data) {
-
-       if (forward == true && data.results[currentArticleIndex].multimedia == null){
-            while (data.results[currentArticleIndex].multimedia == null){
-                currentArticleIndex++;
-            } 
-       } else if (forward == false && data.results[currentArticleIndex].multimedia == null){
-            while (data.results[currentArticleIndex].multimedia == null){
-                currentArticleIndex--;
-            } 
-       }
+      if (
+        forward == true &&
+        data.results[currentArticleIndex].multimedia == null
+      ) {
+        while (data.results[currentArticleIndex].multimedia == null) {
+          currentArticleIndex++;
+        }
+      } else if (
+        forward == false &&
+        data.results[currentArticleIndex].multimedia == null
+      ) {
+        while (data.results[currentArticleIndex].multimedia == null) {
+          currentArticleIndex--;
+        }
+      }
 
       var articleImage = data.results[currentArticleIndex].multimedia[0].url;
       var articleTitle = data.results[currentArticleIndex].title;
       var articleDescription = data.results[currentArticleIndex].abstract;
-      var articleHover = data.results[currentArticleIndex].multimedia[0].caption;
+      var articleHover =
+        data.results[currentArticleIndex].multimedia[0].caption;
       var articleLink = data.results[currentArticleIndex].url;
 
       mainArticleToolTipText.textContent = articleHover;
@@ -149,23 +153,27 @@ function GetMainArticleTopStory(categoryOfNews, forward) {
       mainArticleImage.src = articleImage;
       mainArticleLink.href = articleLink;
 
-      localStorage.setItem("currentArticleIndex", currentArticleIndex)
-
+      localStorage.setItem("currentArticleIndex", currentArticleIndex);
     });
 }
 
 function GetOtherNewsStory(categoryOfNews) {
-  var requestURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + categoryOfNews + "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
+  var requestURL =
+    "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+    categoryOfNews +
+    "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
   fetch(requestURL)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-
       console.log(data);
-      currentCategory.textContent = data.response.docs[currentArticleIndex].type_of_material;
-      var articleImage = "https://www.nytimes.com/" + data.response.docs[currentArticleIndex].multimedia[0].url;
+      currentCategory.textContent =
+        data.response.docs[currentArticleIndex].type_of_material;
+      var articleImage =
+        "https://www.nytimes.com/" +
+        data.response.docs[currentArticleIndex].multimedia[0].url;
       var articleTitle = data.response.docs[currentArticleIndex].headline.main;
       var articleDescription = data.response.docs[currentArticleIndex].abstract;
       var articleHover = data.response.docs[currentArticleIndex].snippet;
@@ -200,30 +208,29 @@ span.onclick = function () {
   modal.style.display = "none";
 };
 
-
 //Populate side bar
 // function sidebararticles(topstoriesurl){
 
-  //Clear out daily forecast
-  // $( ".newssidebar" ).empty();
+//Clear out daily forecast
+// $( ".newssidebar" ).empty();
 
-  var topstoriesurl = 'https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY'
+var topstoriesurl =
+  "https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json?api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY";
 
-  fetch(topstoriesurl)
-      .then(function(response){
-          return response.json();
-      })
-      
-      .then(function(data){
-        console.log("here it is",data)
-        sidebarEL.innerHTML=" "
+fetch(topstoriesurl)
+  .then(function (response) {
+    return response.json();
+  })
 
-        var topstorylist = data.results
+  .then(function (data) {
+    console.log("here it is", data);
+    sidebarEL.innerHTML = " ";
 
-        for (var i = 0; i <=3; i++) {
+    var topstorylist = data.results;
 
-          console.log("i is " + i);
-          
+    for (var i = 0; i <= 3; i++) {
+      console.log("i is " + i);
+
 
           var title;
           var blurb;
@@ -238,21 +245,37 @@ span.onclick = function () {
 
           console.log("LINK",sidelink)
 
-          if (topstorylist[i].media.length == 0){
-            picture = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-          } else { picture = mediaData['media-metadata'][1].url }
+ 
 
-          //picture = mediaData['media-metadata'][1].url
+      if (topstorylist[i].media.length == 0) {
+        picture =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png";
+      } else {
+        picture = mediaData["media-metadata"][1].url;
+      }
 
-          
+      //picture = mediaData['media-metadata'][1].url
 
-          //make cards
-          var storycard = document.createElement("div");
-          storycard.classList.add("max-w-sm","rounded","overflow-hidden","shadow-lg","sidebarcards")
-          
-          //create card body
-          var cardBody = document.createElement("div");
-          cardBody.classList.add("px-6","py-4")
+      //make cards
+      var storycard = document.createElement("div");
+      storycard.classList.add(
+        "max-w-sm",
+        "rounded",
+        "overflow-hidden",
+        "shadow-2xl",
+        "p-3",
+        "m-3",
+        "sidebarcards",
+        "bg-teal-50",
+        "drop-shadow-2xl",
+        "transition",
+        "hover:-translate-y-1",
+        "hover:scale-110"
+      );
+
+      //create card body
+      var cardBody = document.createElement("div");
+      cardBody.classList.add("px-6", "py-4");
 
           title = topstorylist[i].title
           blurb =topstorylist[i].abstract
@@ -281,6 +304,7 @@ span.onclick = function () {
                                 
                                 })
                                 abc.addEventListener("click",Copyer)
+                                console.log("WHAT HAPPENS",Copyer)
                                 cardBody.appendChild(abc)
 //                                 <span class="linkshare material-symbols-outlined">
 // content_copy
