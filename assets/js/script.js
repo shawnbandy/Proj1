@@ -371,17 +371,17 @@ const fetchData = async (categoryOfNews) => {
   } 
   data?.response?.docs?.forEach((article) => {
     if (article.multimedia.length == 0) {
-      picture =
+      var picture =
         "https://www.freeiconspng.com/uploads/no-image-icon-15.png";
     } else {
-      picture = article.multimedia[0].url;
+      var picture = "https://www.nytimes.com/" + article.multimedia[0].url;
     }
     console.log("HEEEEEY",article)
     articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300">
                <p class="text-sm">${article.headline.main}</p>
                <img
                  class= "h-3/4 object-cover self-end"
-                 src="https://www.nytimes.com/${picture}"
+                 src="${picture}"
                  alt="placeholder"
                  />      
                </div>
