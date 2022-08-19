@@ -261,13 +261,6 @@ var topstoriesurl =
     for (var i = 0; i <= 3; i++) {
           console.log("i is " + i);
 
-<<<<<<< HEAD
-          var title;
-          var blurb;
-          var picture;
-=======
->>>>>>> main
-
           var title;
           var blurb;
           var picture;
@@ -314,13 +307,6 @@ var topstoriesurl =
           var cardBody = document.createElement("div");
       cardBody.classList.add("px-6", "py-4");
 
-<<<<<<< HEAD
-      title = topstorylist[i].title;
-      blurb = topstorylist[i].abstract;
-          cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
-                                 <img class="w-full" src= "${picture}"> </><br>
-                                   <p class="text-sm">${blurb}<p><br>`;
-=======
           title = topstorylist[i].title
           blurb =topstorylist[i].abstract
          
@@ -330,7 +316,6 @@ var topstoriesurl =
                                 <img class="w-full" src= "${picture}"> </><br>
                                 <p class="text-sm">${blurb}<p><br>
                                 <p id="Copyme">Click Icon to Copy URL<p><p id="Copied"class="hide">Copied!<p>`
->>>>>>> main
 
                                 var Copyman = document.querySelector("#Copyme")
                                 var Copiedman = document.querySelector("#Copied")
