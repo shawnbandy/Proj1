@@ -21,6 +21,7 @@ TODO: Populate/Fetch the side bar with the top stories API as cards, limit with 
 //*Most Popular:
 //?Most shared on FB, most emailed articles, most viewed articles
 
+
 var mainArticleTitle = document.getElementById("mainArticleTitle");
 var mainArticleImage = document.getElementById("mainArticleImage");
 var mainArticleDescription = document.getElementById("mainArticleDescription");
@@ -38,6 +39,20 @@ var firstNameInput = document.getElementById("firstName");
 var lastNameInput = document.getElementById("lastName");
 var emailInput = document.getElementById("emailInput");
 
+
+
+window.addEventListener('load', (event) => {
+  currentCategory.textContent = "Home";
+  if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
+    GetMainArticleTopStory(localStorage.getItem("lastCategory"));
+  } else if (localStorage.getItem("lastCategory")) {
+    GetOtherNewsStory(localStorage.getItem("lastCategory"));
+  } else {
+    GetMainArticleTopStory("home");
+  }
+});
+
+
 //*this checks localStorage for the last Category, and then runs either MainArticle or OtherNews depending on parameters. If there is no LS, it will default to Home page -SC
 var mainArticleArray = ["US", "Politics", "Sports", "Business", "Insider"];
 if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
@@ -45,7 +60,7 @@ if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
 } else if (localStorage.getItem("lastCategory")) {
   GetOtherNewsStory(localStorage.getItem("lastCategory"));
 } else {
-  GetMainArticleTopStory("home");
+  GetMainArticleTopStory("Home");
 }
 
 var globalCategory;
@@ -202,9 +217,14 @@ function GetOtherNewsStory(categoryOfNews) {
       console.log(data);
       currentCategory.textContent =
         data.response.docs[currentArticleIndex].type_of_material;
-      var articleImage =
-        "https://www.nytimes.com/" +
-        data.response.docs[currentArticleIndex].multimedia[0].url;
+
+        if (data.response.docs[currentArticleIndex].multimedia[0].length == 0) {
+          var articleImage =
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png";
+        } else {
+          var articleImage = "https://www.nytimes.com/" + data.response.docs[currentArticleIndex].multimedia[0].url;
+        }
+        
       var articleTitle = data.response.docs[currentArticleIndex].headline.main;
       var articleDescription = data.response.docs[currentArticleIndex].abstract;
       var articleHover = data.response.docs[currentArticleIndex].snippet;
@@ -373,20 +393,19 @@ const fetchData = async (categoryOfNews) => {
     } else {
       var picture = "https://www.nytimes.com/" + article.multimedia[0].url;
     }
-    sidelink =  article.web_url
+    sidelink = article.web_url
     
-    console.log("HEEEEEY",article)
     articlesWrapper.innerHTML += `<div class="flex makeithappen flex-col 
      border border-slate-300 hover:-translate-y-1
     hover:scale-110 bg-teal-50/100 shadow-2xl">
                <p class="text-sm font-bold">${article.headline.main}</p>
-               <a class="h-4/4 object-cover self-end" href="${sidelink}"> 
+               <a class= href="${sidelink}"></a> 
                   <img
-                  class= "object-cover self-end"
+                  class= "h-3/4 object-cover self-end self-center"
                   src="${picture}"
                   alt="placeholder"
                    />
-                </a>      
+                     
                </div>
              `;
       
