@@ -4,6 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!--Copy link button-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
         <!--*Tailwind linking--> 
         <script 
         rel="stylesheet"
@@ -29,19 +32,24 @@
       </head>
 
   <body class="container">
-    <header class="text-center h-16 border bg-gradient-to-r from-cyan-500 to-cyan-200 w-screen">
-      <h1 class="pb-3"></h1>
-      <div class="navbar">
-        <div id="navigationBar" class="navigation">
+    <header class="text-center h-16 border bg-gradient-to-r from-cyan-500 to-cyan-200 w-screen 
+    sm:flex sm:justify-center sm:h-auto
+    lg:flex lg:justify-center">
+      <div class="container navbar flex w-full
+      sm:grid sm:grid-cols-1
+      lg:flex">
+        <div id="navigationBar" class="navigation justify-start
+        sm:flex sm:justify-center
+        lg:flex lg:justify-start lg:content-bottom">
           <a href="#sports">US</a>
           <a href="#science">Politics</a>
           <a href="#politics">Sports</a>
           <a href="#economics">Business</a>
           <a href="#celebrity">Insider</a>
         </div>
-        <div class="find">
-          <div class="search-bar"></div>
-          <form>
+        <div class="find
+        lg: justify-end">
+          <form class="justify-end">
             <input id="searchInput" type="text" placeholder="Search.." name="search" />
             <button id="searchButton" type="submit">🔍</button>
           </form>
@@ -49,12 +57,11 @@
       </div>
     </header>
 
-    <main class="p-6 w-screen flex h-auto">
+    <main class="p-6 w-screen flex h-100 sm:grid lg:flex justify-evenly content-evenly">
 
-          <!--*Sidebar-->
-          <!--*Sidebar-->
-          <aside class="border-solid border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 p-5 m-3 h-auto w-1/4">
-            <div class="newssidebar">
+          <!--*Sidebar-->      
+          <aside class="border-solid border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 p-5 m-3 h-100 lg:w-1/4 sm:w-auto sm:flex">
+            <div class="newssidebar lg:block sm:flex sm:grid sm:grid-cols-2">
               <div class="max-w-sm rounded overflow-hidden transition">
                 <img class="w-full" src="" alt="Sunset in the mountains">
                 <div class="px-6 py-4">
@@ -72,13 +79,16 @@
           </aside>
 
           <!--*Main body-->
-      <section class="text-center h-auto w-3/4">
+      <section class="text-center lg:w-4/6 pt-2
+      sm:w-full">
 
             <div id="currentCategory" class="text-3xl uppercase border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-16 m-1 flex items-center justify-center">
               <p></p>
             </div>
             <!--*This is the section for the main article-->
-            <div class="flex flex-col h-2/4 border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 m-1">
+            <div class="flex flex-col h-3/4 border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 m-1 
+            sm:h-auto
+            lg:h-2/4">
               <div class="m-1 border border-4 h-full col-span-3">
                 <div id="mainArticleTitle" class="font-bold border border-4 bg-teal-50 m-3  "></div>
                 <figure class="border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 transition
@@ -106,47 +116,12 @@
               </div>
             </div>
 
-            <div class=" articles-wrapper flex flex-wrap justify-evenly border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-2/5 m-1 mt-10">
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 1</p>
-                <div>
-                  <img 
-                  src="https://designshack.net/wp-content/uploads/placehold.jpg" 
-                  alt="placeholder"
-                  />
-                </div>
-              </div>
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 2</p>
-                <div>
-                  <img
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg"
-                    alt="placeholder"
-                  />
-                </div>
-              </div>
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 3</p>
-                <div>
-                  <img
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg"
-                    alt="placeholder"
-                  />
-                </div>
-              </div>
-              <div class="column m-1 transition
-              hover:-translate-y-1 hover:scale-110">
-                <p>article 4</p>
-                <div>
-                  <img
-                    src="https://designshack.net/wp-content/uploads/placehold.jpg"
-                    alt="placeholder"
-                  />
-                </div>
-              </div>
+            <!--*this section is for the subarticles, made in JS-->
+            <div id="currentCategory" class="text-3xl uppercase border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-16 m-1 flex items-center justify-center mt-5">
+              <p>You may also like...</p>
+            </div>
+            <div class="articles-wrapper grid grid-cols-5 justify-evenly self-end border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 lg:h-2/6 sm:h-auto">
+
             </div>
             
       </section>
@@ -159,27 +134,29 @@
         <span style="right: 0; top: 0; position: absolute;" class="close text-sm font-bold cursor-pointer">&times;</span>
         <label style=" top: 50%; -ms-transform:translateY(-50%); transform: rotateY(-50%);" />
           <h3 class="text-center">Keep Up With The Latest News!</h3>
-          <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+          <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 ">
             Name
           </span>
-          <input type="name" name="firstname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="First" />
-          <input type="name" name="lastname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Last" />
+          <input id="firstName" type="name" name="firstname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="First" />
+          <input id="lastName" type="name" name="lastname" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Last" />
         </label>
           <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
             Email
           </span>
-          <input type="email" name="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+          <input id="emailInput" type="email" name="email" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+          <div class="flex justify-center mt-5">
+            <button id="emailSubmitBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+          </div>
         </label>
       </div>
     </div>
 
     </main>
 
-    <footer class="text-center h-auto border bg-gradient-to-r from-cyan-500 to-cyan-200 border-4 h-auto  w-screen bg-sky-400">
+    <footer class="text-center border bg-gradient-to-r from-cyan-500 to-cyan-200 h-auto w-screen bg-sky-400">
       <button class="cursor-pointer border border-double border-4 p-4 m-3 rounded-md drop-shadow-2xl bg-slate-200 border-slate-800" id="myBtn">Subscribe</button>
      
     </footer>
-
 
         <script type= "text/javascript" src="assets/js/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

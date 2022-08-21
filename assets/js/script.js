@@ -33,6 +33,10 @@ var searchButton = document.getElementById("searchButton");
 var searchInput = document.getElementById("searchInput");
 var nextButton = document.getElementById("nextBut");
 var prevButton = document.getElementById("prevBut");
+var emailSubmitBtn = document.getElementById("emailSubmitBtn");
+var firstNameInput = document.getElementById("firstName");
+var lastNameInput = document.getElementById("lastName");
+var emailInput = document.getElementById("emailInput");
 
 //*this checks localStorage for the last Category, and then runs either MainArticle or OtherNews depending on parameters. If there is no LS, it will default to Home page -SC
 var mainArticleArray = ["US", "Politics", "Sports", "Business", "Insider"];
@@ -41,7 +45,7 @@ if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
 } else if (localStorage.getItem("lastCategory")) {
   GetOtherNewsStory(localStorage.getItem("lastCategory"));
 } else {
-  GetMainArticleTopStory("Home");
+  GetMainArticleTopStory("home");
 }
 
 var globalCategory;
@@ -56,6 +60,7 @@ navigationBar.addEventListener("click", function (event) {
   currentArticleIndex = 0;
   globalCategory = event.target.textContent;
   GetMainArticleTopStory(event.target.textContent);
+  fetchData(event.target.textContent);
 });
 
 //*populates the main page w/ descriptions when a search is made -SC
@@ -97,6 +102,32 @@ prevButton.addEventListener("click", function () {
   } else {
     GetOtherNewsStory(globalCategory, false);
   }
+});
+
+//*this will put a user's input into an email array and keep it over multiple sessions
+var emailArray = [];
+if (localStorage.getItem("emailList")) {
+  emailArray = JSON.parse(localStorage.getItem("emailList"));
+
+  localStorage.removeItem("emailList");
+  console.log(emailArray);
+}
+
+emailSubmitBtn.addEventListener("click", function (event) {
+  var input = {
+    firstName: firstNameInput.value,
+    lastName: lastNameInput.value,
+    email: emailInput.value,
+  };
+
+  emailArray.push(input);
+
+  localStorage.setItem("emailList", JSON.stringify(emailArray));
+
+  console.log(emailArray);
+
+  emailSubmitBtn.textContent = "Thank you!";
+  emailSubmitBtn.setAttribute("class", "cursor-not-allowed");
 });
 
 function MainOrOtherArticleChecker(string) {
@@ -223,22 +254,26 @@ fetch(topstoriesurl)
   })
 
   .then(function (data) {
-    console.log("here it is", data);
+    //console.log("here it is", data);
     sidebarEL.innerHTML = " ";
 
     var topstorylist = data.results;
 
     for (var i = 0; i <= 3; i++) {
-      console.log("i is " + i);
+      //console.log("i is " + i);
 
       var title;
       var blurb;
       var picture;
+      var sidelink;
 
       title = topstorylist[i].title;
-      console.log("TITLE", title);
+      //console.log("TITLE",title)
       blurb = topstorylist[i].abstract;
       var mediaData = topstorylist[i].media[0]; //data.results[i].media[0]
+      sidelink = topstorylist[i].url;
+
+      //console.log("LINK",sidelink)
 
       if (topstorylist[i].media.length == 0) {
         picture =
@@ -249,21 +284,24 @@ fetch(topstoriesurl)
 
       //picture = mediaData['media-metadata'][1].url
 
-      //make cards
+      //!make cards
       var storycard = document.createElement("div");
       storycard.classList.add(
-        "max-w-sm",
+        "flex",
+        "justify-center",
+        "content-evenly",
+        "justify-evenly",
+        "sm:w-full",
         "rounded",
         "overflow-hidden",
         "shadow-2xl",
-        "p-3",
-        "m-3",
         "sidebarcards",
         "bg-teal-50",
         "drop-shadow-2xl",
         "transition",
         "hover:-translate-y-1",
-        "hover:scale-110"
+        "hover:scale-110",
+        "lg:w-full"
       );
 
       //create card body
@@ -272,10 +310,44 @@ fetch(topstoriesurl)
 
       title = topstorylist[i].title;
       blurb = topstorylist[i].abstract;
-      cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6>
-                                 <img class="w-full" src= "${picture}"> </><br>
-                                   <p class="text-sm">${blurb}<p><br>`;
 
+      cardBody.innerHTML = `<h6 class="font-bold" >${title}</h6> 
+                                <a href="${sidelink}">             
+                                <img class="w-full" src= "${picture}"> </><br>
+                                <p class="text-sm">${blurb}<p><br>
+                                <p id="Copyme">Click Icon to Copy URL<p><p id="Copied"class="hide">Copied!<p>`;
+
+      var Copyman = document.querySelector("#Copyme");
+      var Copiedman = document.querySelector("#Copied");
+
+      var abc = document.createElement("span");
+      abc.setAttribute(
+        "class",
+        "linkshare material-symbols-outlined cursor-pointer active:opacity-75"
+      );
+      abc.textContent = "content_copy";
+      abc.addEventListener("click", function (event) {
+        console.log("HERE LOOK", event, sidelink);
+        event.preventDefault();
+        navigator.clipboard.writeText(sidelink);
+        Copyman.classList.add("hide");
+        Copiedman.classList.remove("hide");
+      });
+
+      cardBody.appendChild(abc);
+      //                                 <span class="linkshare material-symbols-outlined">
+      // content_copy
+      // </span>`
+
+      // const buttoncopy = document.querySelector(".linkshare")
+
+      // console.log(buttoncopy)
+
+      // buttoncopy.addEventListener("click", navigator.clipboard.writeText(sidelink))
+
+      // button.onclick = () => {
+      //   navigator.clipboard.writeText(sidelink);
+      // }
       storycard.appendChild(cardBody);
       sidebarEL.append(storycard);
     }
@@ -283,9 +355,12 @@ fetch(topstoriesurl)
 
 let articlesWrapper = document.querySelector(".articles-wrapper");
 
-const fetchData = async () => {
+const fetchData = async (categoryOfNews) => {
+  currentCategory.textContent = categoryOfNews;
   const res = await fetch(
-    `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY`
+    "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+      categoryOfNews +
+      "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
   );
   const data = await res.json();
   console.log(data.response.docs);
@@ -293,17 +368,23 @@ const fetchData = async () => {
     articlesWrapper.innerHTML = "";
   }
   data?.response?.docs?.forEach((article) => {
-    articlesWrapper.innerHTML += ` <div class="column m-1 box-border w-1/5 p-2 border-4 bg-teal-50 hover:animate-pulse">
-               <p>${article.headline.main}</p>
-    
-               <div>
-                 <img
-              
-                 src="https://www.nytimes.com/${article.multimedia[0].url}"
+    if (article.multimedia.length == 0) {
+      var picture = "https://www.freeiconspng.com/uploads/no-image-icon-15.png";
+    } else {
+      var picture = "https://www.nytimes.com/" + article.multimedia[0].url;
+    }
+
+    console.log("HEEEEEY", article);
+    articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300 hover:-translate-y-1
+    hover:scale-110 bg-teal-50/100 shadow-2xl">
+               <p class="text-sm font-bold">${article.headline.main}</p>
+               <img
+                 class= "h-3/4 object-cover self-end"
+                 src="${picture}"
                  alt="placeholder"
-                 />
+                 />      
                </div>
-             </div>`;
+             `;
   });
 };
 
