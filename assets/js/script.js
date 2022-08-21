@@ -293,7 +293,7 @@ const fetchData = async () => {
     articlesWrapper.innerHTML = "";
   }
   data?.response?.docs?.forEach((article) => {
-    articlesWrapper.innerHTML += ` <div class="column m-1 box-border w-1/5 p-4 border-4  ">
+    articlesWrapper.innerHTML += ` <div class="column m-1 box-border w-1/5 p-2 border-4 bg-teal-50 hover:animate-pulse">
                <p>${article.headline.main}</p>
     
                <div>
