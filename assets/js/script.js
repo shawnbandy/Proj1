@@ -393,20 +393,19 @@ const fetchData = async (categoryOfNews) => {
     } else {
       var picture = "https://www.nytimes.com/" + article.multimedia[0].url;
     }
-    sidelink =  article.web_url
+    sidelink = article.web_url
     
-    console.log("HEEEEEY",article)
     articlesWrapper.innerHTML += `<div class="flex makeithappen flex-col 
      border border-slate-300 hover:-translate-y-1
     hover:scale-110 bg-teal-50/100 shadow-2xl">
                <p class="text-sm font-bold">${article.headline.main}</p>
-               <a class="h-4/4 object-cover self-end" href="${sidelink}"> 
+               <a class= href="${sidelink}"></a> 
                   <img
-                  class= "object-cover self-end"
+                  class= "h-3/4 object-cover self-end self-center"
                   src="${picture}"
                   alt="placeholder"
                    />
-                </a>      
+                     
                </div>
              `;
       
