@@ -366,7 +366,7 @@ const fetchData = async (categoryOfNews) => {
     "&api-key=L9MwQmBLexoyZvvhv5AtqIfzJ3pyM5HY"
   );
   const data = await res.json();
-  console.log(data.response.docs);
+  console.log("LEO LOOK",data.response.docs);
   if (data) {
     articlesWrapper.innerHTML = "";
   } 
@@ -377,19 +377,23 @@ const fetchData = async (categoryOfNews) => {
     } else {
       var picture = "https://www.nytimes.com/" + article.multimedia[0].url;
     }
-
+    sidelink =  article.web_url
     
     console.log("HEEEEEY",article)
-    articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300 hover:-translate-y-1
+    articlesWrapper.innerHTML += `<div class="flex makeithappen flex-col 
+     border border-slate-300 hover:-translate-y-1
     hover:scale-110 bg-teal-50/100 shadow-2xl">
                <p class="text-sm font-bold">${article.headline.main}</p>
-               <img
-                 class= "h-3/4 object-cover self-end"
-                 src="${picture}"
-                 alt="placeholder"
-                 />      
+               <a class="h-4/4 object-cover self-end" href="${sidelink}"> 
+                  <img
+                  class= "object-cover self-end"
+                  src="${picture}"
+                  alt="placeholder"
+                   />
+                </a>      
                </div>
              `;
+      
   });
 };
 
