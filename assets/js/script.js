@@ -340,22 +340,23 @@ var topstoriesurl =
 
                                 var Copyman = document.querySelector("#Copyme")
                                 var Copiedman = document.querySelector("#Copied")
-                                function Copyer(){
-                                  Copyman.classList.add("hide")
-                                  Copiedman.classList.remove("hide")
-                                }
+                             
 
                                 var abc = document.createElement('span');
-                                abc.setAttribute("class", "linkshare material-symbols-outlined")
+                                abc.setAttribute("class", "linkshare material-symbols-outlined cursor-pointer active:opacity-75")
                                 abc.textContent = 'content_copy'
                                 abc.addEventListener("click", function(event) {
                                   console.log("HERE LOOK",event,sidelink)
                                   event.preventDefault()
                                   navigator.clipboard.writeText(sidelink)
+                                  Copyman.classList.add("hide")
+                                  Copiedman.classList.remove("hide")
                                 
                                 })
-                                abc.addEventListener("click",Copyer)
-                                //console.log("WHAT HAPPENS",Copyer)
+                                
+                                
+
+
                                 cardBody.appendChild(abc)
 //                                 <span class="linkshare material-symbols-outlined">
 // content_copy
@@ -396,9 +397,12 @@ const fetchData = async (categoryOfNews) => {
     } else {
       var picture = "https://www.nytimes.com/" + article.multimedia[0].url;
     }
+
+    
     console.log("HEEEEEY",article)
-    articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300">
-               <p class="text-sm">${article.headline.main}</p>
+    articlesWrapper.innerHTML += `<div class="flex flex-col border border-slate-300 hover:-translate-y-1
+    hover:scale-110 bg-teal-50/100 shadow-2xl">
+               <p class="text-sm font-bold">${article.headline.main}</p>
                <img
                  class= "h-3/4 object-cover self-end"
                  src="${picture}"
