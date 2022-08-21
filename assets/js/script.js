@@ -37,6 +37,19 @@ var emailSubmitBtn = document.getElementById("emailSubmitBtn");
 var firstNameInput = document.getElementById("firstName");
 var lastNameInput = document.getElementById("lastName");
 var emailInput = document.getElementById("emailInput");
+var f09Modal = document.getElementById("409Modal");
+var modalClose = document.getElementById("shut");
+
+window.addEventListener("load", (event) => {
+  currentCategory.textContent = "Home";
+  if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
+    GetMainArticleTopStory(localStorage.getItem("lastCategory"));
+  } else if (localStorage.getItem("lastCategory")) {
+    GetOtherNewsStory(localStorage.getItem("lastCategory"));
+  } else {
+    GetMainArticleTopStory("home");
+  }
+});
 
 //*this checks localStorage for the last Category, and then runs either MainArticle or OtherNews depending on parameters. If there is no LS, it will default to Home page -SC
 var mainArticleArray = ["US", "Politics", "Sports", "Business", "Insider"];
@@ -45,7 +58,7 @@ if (mainArticleArray.includes(localStorage.getItem("lastCategory"))) {
 } else if (localStorage.getItem("lastCategory")) {
   GetOtherNewsStory(localStorage.getItem("lastCategory"));
 } else {
-  GetMainArticleTopStory("home");
+  GetMainArticleTopStory("Home");
 }
 
 var globalCategory;
@@ -151,6 +164,7 @@ function GetMainArticleTopStory(categoryOfNews, forward) {
     .then(function (response) {
       if (response.status == 429) {
         console.log("Too many requests!! Try again in a minute.");
+        f09Modal.style.display = "block";
       }
       return response.json();
     })
@@ -196,15 +210,26 @@ function GetOtherNewsStory(categoryOfNews) {
 
   fetch(requestURL)
     .then(function (response) {
+      if (response.status == 429) {
+        console.log("Too many requests!! Try again in a minute.");
+        f09Modal.style.display = "block";
+      }
       return response.json();
     })
     .then(function (data) {
       console.log(data);
       currentCategory.textContent =
         data.response.docs[currentArticleIndex].type_of_material;
-      var articleImage =
-        "https://www.nytimes.com/" +
-        data.response.docs[currentArticleIndex].multimedia[0].url;
+
+      if (data.response.docs[currentArticleIndex].multimedia[0].length == 0) {
+        var articleImage =
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png";
+      } else {
+        var articleImage =
+          "https://www.nytimes.com/" +
+          data.response.docs[currentArticleIndex].multimedia[0].url;
+      }
+
       var articleTitle = data.response.docs[currentArticleIndex].headline.main;
       var articleDescription = data.response.docs[currentArticleIndex].abstract;
       var articleHover = data.response.docs[currentArticleIndex].snippet;
@@ -217,6 +242,11 @@ function GetOtherNewsStory(categoryOfNews) {
       mainArticleLink.href = articleLink;
     });
 }
+
+// When the user clicks on <span> (x), close the modal
+modalClose.onclick = function () {
+  f09Modal.style.display = "none";
+};
 
 //!LEO'S SECTION
 var btn = document.getElementById("myBtn");
@@ -250,6 +280,10 @@ var topstoriesurl =
 
 fetch(topstoriesurl)
   .then(function (response) {
+    if (response.status == 429) {
+      console.log("Too many requests!! Try again in a minute.");
+      f09Modal.style.display = "block";
+    }
     return response.json();
   })
 
@@ -375,7 +409,9 @@ const fetchData = async (categoryOfNews) => {
     }
     sidelink = article.web_url;
 
-    console.log("HEEEEEY", article);
+    console.log();
+    sidelink = article.web_url;
+
     articlesWrapper.innerHTML += `<div class="flex makeithappen flex-col 
      border border-slate-300 hover:-translate-y-1
     hover:scale-110 bg-teal-50/100 shadow-2xl">
