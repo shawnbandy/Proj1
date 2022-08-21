@@ -352,24 +352,22 @@ fetch(topstoriesurl)
                                 <a href="${sidelink}">             
                                 <img class="w-full" src= "${picture}"> </><br>
                                 <p class="text-sm">${blurb}<p><br>
-                                <p id="Copyme">Click Icon to Copy URL<p><p id="Copied"class="hide">Copied!<p>`;
+                                <p>Click to Copy URL<p>
+                                `
 
-      var Copyman = document.querySelector("#Copyme");
-      var Copiedman = document.querySelector("#Copied");
+                                
+                             
 
-      var abc = document.createElement("span");
-      abc.setAttribute(
-        "class",
-        "linkshare material-symbols-outlined cursor-pointer active:opacity-75"
-      );
-      abc.textContent = "content_copy";
-      abc.addEventListener("click", function (event) {
-        console.log("HERE LOOK", event, sidelink);
-        event.preventDefault();
-        navigator.clipboard.writeText(sidelink);
-        Copyman.classList.add("hide");
-        Copiedman.classList.remove("hide");
-      });
+                                var abc = document.createElement('span');
+                                abc.setAttribute("class", "linkshare material-symbols-outlined cursor-pointer active:opacity-75")
+                                abc.textContent = 'content_copy'
+                                abc.addEventListener("click", function(event) {
+                                  console.log("HERE LOOK",event,sidelink)
+                                  event.preventDefault()
+                                  navigator.clipboard.writeText(sidelink)   
+                                })
+                                
+                                
 
       cardBody.appendChild(abc);
       //                                 <span class="linkshare material-symbols-outlined">
