@@ -403,7 +403,6 @@ const fetchData = async (categoryOfNews) => {
     } else {
       var picture = "https://www.nytimes.com/" + article.multimedia[0].url;
     }
-    sidelink = article.web_url;
 
     console.log();
     sidelink = article.web_url;
@@ -412,13 +411,13 @@ const fetchData = async (categoryOfNews) => {
      border border-slate-300 hover:-translate-y-1
     hover:scale-110 bg-teal-50/100 shadow-2xl">
                <p class="text-sm font-bold">${article.headline.main}</p>
-               <a class="h-4/4 object-cover self-end" href="${sidelink}"> 
+               
                   <img
-                  class= "object-cover self-end"
+                  class= "h-3/4 object-cover self-end self-center"
                   src="${picture}"
                   alt="placeholder"
                    />
-                </a>      
+               <a href="${sidelink}"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Full Article</button></a>
                </div>
              `;
   });
