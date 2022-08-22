@@ -67,5 +67,5 @@ Swift News is a easy to access news website that uses multiple APIs from the New
 
 Link to Repo: https://github.com/shawnbandy/SwiftNews
 
-Link to Deployed Application: 
+Link to Deployed Application: https://shawnbandy.github.io/SwiftNews/
 
