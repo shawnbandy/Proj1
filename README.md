@@ -11,7 +11,8 @@ Requirements:
 
 
 
-User Story: 
+## User Story:
+
 As a millennial trying to pay attention to the news, 
 I want to be able to see a 'blurb' form of the news that is quick to read 
 So I can quickly get up to date on current events
@@ -57,7 +58,14 @@ This was accomplished by:
 Application Description: 
 Swift News is a easy to access news website that uses multiple APIs from the New York Times to display the most popular news, the top stories of today, and other news articles. The articles are presented as an easy-to-read format, with their image, abstract, and title displayed per article. The user is able to select between a variety of categories on the responsive navigation bar or search for articles in the search bar. Each category displays their corresponding top news stories, with the most recent story appearing on the main article page. The user can cycle through articles with the Previous/Next buttons when clicked. The older articles within the selected category are displayed as sub-articles below the main article, with each having their abstract and image displayed in an organized manner. A sidebar with the 4 most popular articles, which are the most shared NYT articles on FaceBook, are displayed as a card format with a share option, which copies the URL of the article to the clipboard. The footer hosts a subscribe button which, when clicked, pops up a responsive modal where the user can submit their first name, last name, and email. The data is stored into an array for contact purposes. Lastly, the last article and category are stored to LocalStorage so the user can resume their browsing.
 
+## Screenshots
+
+![Screenshot of Desktop Version of SwiftNews Web Page.](/assets/img/Screen%20Shot%202022-08-21%20at%208.44.28%20PM.png) 
+![Screenshot of Desktop Version of SwiftNews Web Page.Pt.2](/assets/img/Screen%20Shot%202022-08-21%20at%208.45.12%20PM.png)
+
+## Links
+
 Link to Repo: https://github.com/shawnbandy/SwiftNews
 
-Link to Deployed Application: 
+Link to Deployed Application: https://shawnbandy.github.io/SwiftNews/
 

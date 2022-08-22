@@ -349,10 +349,8 @@ fetch(topstoriesurl)
                                 <a href="${sidelink}">             
                                 <img class="w-full" src= "${picture}"> </><br>
                                 <p class="text-sm">${blurb}<p><br>
-                                <p id="Copyme">Click Icon to Copy URL<p><p id="Copied"class="hide">Copied!<p>`;
-
-      var Copyman = document.querySelector("#Copyme");
-      var Copiedman = document.querySelector("#Copied");
+                                <p>Click to Copy URL<p>
+                                `;
 
       var abc = document.createElement("span");
       abc.setAttribute(
@@ -364,8 +362,6 @@ fetch(topstoriesurl)
         console.log("HERE LOOK", event, sidelink);
         event.preventDefault();
         navigator.clipboard.writeText(sidelink);
-        Copyman.classList.add("hide");
-        Copiedman.classList.remove("hide");
       });
 
       cardBody.appendChild(abc);
