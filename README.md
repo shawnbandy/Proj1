@@ -60,8 +60,8 @@ Swift News is a easy to access news website that uses multiple APIs from the New
 
 ## Screenshots
 
-![Screenshot of Desktop Version of SwiftNews Web Page.](./Screen%20Shot%202022-08-21%20at%208.44.28%20PM.png) 
-![Screenshot of Desktop Version of SwiftNews Web Page.Pt.2](Screen%20Shot%202022-08-21%20at%208.45.12%20PM.png)
+![Screenshot of Desktop Version of SwiftNews Web Page.](/assets/img/Screen%20Shot%202022-08-21%20at%208.44.28%20PM.png) 
+![Screenshot of Desktop Version of SwiftNews Web Page.Pt.2](/assets/img/Screen%20Shot%202022-08-21%20at%208.45.12%20PM.png)
 
 ## Links
 
